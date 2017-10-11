@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.emprog.debug.jtag.jlink.launchConfigurationType">
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doConnectToRunning" value="false"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doContinue" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doFirstReset" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doGdbServerAllocateConsole" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doGdbServerAllocateSemihostingConsole" value="false"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doGdbServerInitRegs" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doGdbServerLocalOnly" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doGdbServerSilent" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doGdbServerVerifyDownload" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doSecondReset" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.doStartGdbServer" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.enableFlashBreakpoints" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.enableSemihosting" value="false"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.enableSemihostingIoclientGdbClient" value="false"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.enableSemihostingIoclientTelnet" value="true"/>
+<booleanAttribute key="com.emprog.debug.jtag.jlink.enableSwo" value="false"/>
+<intAttribute key="com.emprog.debug.jtag.jlink.firstResetSpeed" value="1000"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.firstResetType" value="0"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbClientOtherCommands" value="set mem inaccessible-by-default off"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbClientOtherOptions" value=""/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbServerConnection" value="usb"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbServerConnectionAddress" value=""/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbServerDebugInterface" value="swd"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbServerDeviceEndianness" value="little"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbServerDeviceName" value="EFM32G210F128"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbServerDeviceSpeed" value="auto"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbServerExecutable" value="${eclipse_home}\..\segger\JLinkGDBServerCL.exe"/>
+<intAttribute key="com.emprog.debug.jtag.jlink.gdbServerGdbPortNumber" value="2331"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbServerLog" value=""/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.gdbServerOther" value=""/>
+<intAttribute key="com.emprog.debug.jtag.jlink.gdbServerSwoPortNumber" value="2332"/>
+<intAttribute key="com.emprog.debug.jtag.jlink.gdbServerTelnetPortNumber" value="2333"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.interfaceSpeed" value="auto"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.otherRunCommands" value=""/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.secondResetType" value=""/>
+<intAttribute key="com.emprog.debug.jtag.jlink.swoEnableTargetCpuFreq" value="0"/>
+<stringAttribute key="com.emprog.debug.jtag.jlink.swoEnableTargetPortMask" value="0x1"/>
+<intAttribute key="com.emprog.debug.jtag.jlink.swoEnableTargetSwoFreq" value="0"/>
+<stringAttribute key="com.thundervalley.thunderarm.cdt.interface" value="jlink"/>
+<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value=""/>
+<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageOffset" value=""/>
+<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.ipAddress" value="localhost"/>
+<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.jtagDevice" value="GNU ARM J-Link"/>
+<booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.loadImage" value="true"/>
+<booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.loadSymbols" value="true"/>
+<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.pcRegister" value=""/>
+<intAttribute key="org.eclipse.cdt.debug.gdbjtag.core.portNumber" value="2331"/>
+<booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setPcRegister" value="false"/>
+<booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setStopAt" value="true"/>
+<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.stopAt" value="main"/>
+<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsFileName" value=""/>
+<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.symbolsOffset" value=""/>
+<booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForImage" value="false"/>
+<booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useFileForSymbols" value="false"/>
+<booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useProjBinaryForImage" value="true"/>
+<booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useProjBinaryForSymbols" value="true"/>
+<booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.useRemoteTarget" value="true"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.DEBUG_NAME" value="${eclipse_home}\..\ARM\bin\arm-thunder-eabi-gdb-7.8.exe"/>
+<booleanAttribute key="org.eclipse.cdt.dsf.gdb.UPDATE_THREADLIST_ON_SUSPEND" value="false"/>
+<intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
+<stringAttribute key="org.eclipse.cdt.launch.COREFILE_PATH" value=""/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_REGISTER_GROUPS" value=""/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="Debug\EFM32LG330F128.elf"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="EFM32LG330F128"/>
+<booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="true"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="com.thundervalley.thunderarm.cdt.thunder.windows.elf.debug.2112116847"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/EFM32LG330F128"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<mapAttribute key="org.eclipse.debug.core.preferred_launchers">
+<mapEntry key="[debug]" value="org.eclipse.cdt.debug.gdbjtag.core.cdiLaunchDelegate"/>
+</mapAttribute>
+<stringAttribute key="org.eclipse.debug.core.source_locator_id" value="org.eclipse.cdt.debug.core.sourceLocator"/>
+<stringAttribute key="org.eclipse.debug.core.source_locator_memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;sourceLookupDirector&gt;&#13;&#10;&lt;sourceContainers duplicates=&quot;false&quot;&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;default/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.default&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;workspace/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.workspace&quot;/&gt;&#13;&#10;&lt;/sourceContainers&gt;&#13;&#10;&lt;/sourceLookupDirector&gt;&#13;&#10;"/>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.dsf.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList context=&quot;reserved-for-future-use&quot;/&gt;&#13;&#10;"/>
+<stringAttribute key="process_factory_id" value="org.eclipse.cdt.dsf.gdb.GdbProcessFactory"/>
+</launchConfiguration>

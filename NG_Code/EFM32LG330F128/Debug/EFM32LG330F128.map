@@ -1,0 +1,1102 @@
+Archive member included because of file (symbol)
+
+c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+                              c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o (exit)
+c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+                              c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o) (_global_impure_ptr)
+c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+                              c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o (__libc_init_array)
+c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy.o)
+                              ./src/RTOS/queue.o (memcpy)
+c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+                              c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o (memset)
+
+Allocating common symbols
+Common symbol       size              file
+
+PuffSem             0x4               ./src/ADC_Module.o
+LEDRedMut           0x4               ./src/ADC_Module.o
+Outv                0x4               ./src/ADC_Module.o
+SystemCoreClock     0x4               ./src/system_efm32lg.o
+OutiCalc            0x4               ./src/ADC_Module.o
+xQueueRegistry      0x50              ./src/RTOS/queue.o
+BatTemp             0x4               ./src/ADC_Module.o
+Outi                0x4               ./src/ADC_Module.o
+LEDSem              0x4               ./src/ADC_Module.o
+LEDGreenMut         0x4               ./src/ADC_Module.o
+Battery             0x4               ./src/ADC_Module.o
+Vref                0x4               ./src/ADC_Module.o
+HighWaterMark       0x4               ./src/main.o
+LEDBlueMut          0x4               ./src/ADC_Module.o
+
+Discarded input sections
+
+ .text          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crti.o
+ .data          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crti.o
+ .bss           0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crti.o
+ .data          0x00000000        0x4 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+ .text          0x00000000       0x74 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .data          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .bss           0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .ARM.extab     0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .ARM.exidx     0x00000000        0x8 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .ARM.attributes
+                0x00000000       0x1b c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .text          0x00000000        0x0 ./src/RTOS/heap_1.o
+ .data          0x00000000        0x0 ./src/RTOS/heap_1.o
+ .bss           0x00000000        0x0 ./src/RTOS/heap_1.o
+ .text.vPortInitialiseBlocks
+                0x00000000       0x18 ./src/RTOS/heap_1.o
+ .text.xPortGetFreeHeapSize
+                0x00000000       0x1c ./src/RTOS/heap_1.o
+ .text          0x00000000        0x0 ./src/RTOS/list.o
+ .data          0x00000000        0x0 ./src/RTOS/list.o
+ .bss           0x00000000        0x0 ./src/RTOS/list.o
+ .text          0x00000000        0x0 ./src/RTOS/port.o
+ .data          0x00000000        0x0 ./src/RTOS/port.o
+ .bss           0x00000000        0x0 ./src/RTOS/port.o
+ .rodata.pcInterruptPriorityRegisters
+                0x00000000        0x4 ./src/RTOS/port.o
+ .text.vPortEndScheduler
+                0x00000000       0x1c ./src/RTOS/port.o
+ .text.vPortValidateInterruptPriority
+                0x00000000       0x54 ./src/RTOS/port.o
+ .text          0x00000000        0x0 ./src/RTOS/queue.o
+ .data          0x00000000        0x0 ./src/RTOS/queue.o
+ .bss           0x00000000        0x0 ./src/RTOS/queue.o
+ .text.xQueueGenericSendFromISR
+                0x00000000       0xf4 ./src/RTOS/queue.o
+ .text.xQueueGiveFromISR
+                0x00000000       0xd8 ./src/RTOS/queue.o
+ .text.xQueueGenericReceive
+                0x00000000      0x1f4 ./src/RTOS/queue.o
+ .text.xQueueReceiveFromISR
+                0x00000000       0xd4 ./src/RTOS/queue.o
+ .text.xQueuePeekFromISR
+                0x00000000       0x94 ./src/RTOS/queue.o
+ .text.uxQueueMessagesWaiting
+                0x00000000       0x28 ./src/RTOS/queue.o
+ .text.uxQueueSpacesAvailable
+                0x00000000       0x34 ./src/RTOS/queue.o
+ .text.uxQueueMessagesWaitingFromISR
+                0x00000000       0x24 ./src/RTOS/queue.o
+ .text.vQueueDelete
+                0x00000000       0x28 ./src/RTOS/queue.o
+ .text.prvCopyDataFromQueue
+                0x00000000       0x4c ./src/RTOS/queue.o
+ .text.prvIsQueueEmpty
+                0x00000000       0x2c ./src/RTOS/queue.o
+ .text.xQueueIsQueueEmptyFromISR
+                0x00000000       0x30 ./src/RTOS/queue.o
+ .text.xQueueIsQueueFullFromISR
+                0x00000000       0x34 ./src/RTOS/queue.o
+ .text.vQueueAddToRegistry
+                0x00000000       0x50 ./src/RTOS/queue.o
+ .text.pcQueueGetName
+                0x00000000       0x4c ./src/RTOS/queue.o
+ .text.vQueueUnregisterQueue
+                0x00000000       0x50 ./src/RTOS/queue.o
+ COMMON         0x00000000       0x50 ./src/RTOS/queue.o
+ .text          0x00000000        0x0 ./src/RTOS/tasks.o
+ .data          0x00000000        0x0 ./src/RTOS/tasks.o
+ .bss           0x00000000        0x0 ./src/RTOS/tasks.o
+ .text.vTaskDelayUntil
+                0x00000000       0xbc ./src/RTOS/tasks.o
+ .text.vTaskSuspend
+                0x00000000       0xc0 ./src/RTOS/tasks.o
+ .text.prvTaskIsTaskSuspended
+                0x00000000       0x64 ./src/RTOS/tasks.o
+ .text.vTaskResume
+                0x00000000       0xa8 ./src/RTOS/tasks.o
+ .text.xTaskResumeFromISR
+                0x00000000       0xd0 ./src/RTOS/tasks.o
+ .text.vTaskEndScheduler
+                0x00000000       0x2c ./src/RTOS/tasks.o
+ .text.xTaskGetTickCount
+                0x00000000       0x20 ./src/RTOS/tasks.o
+ .text.xTaskGetTickCountFromISR
+                0x00000000       0x24 ./src/RTOS/tasks.o
+ .text.uxTaskGetNumberOfTasks
+                0x00000000       0x18 ./src/RTOS/tasks.o
+ .text.pcTaskGetName
+                0x00000000       0x34 ./src/RTOS/tasks.o
+ .text.vTaskPlaceOnUnorderedEventList
+                0x00000000       0x50 ./src/RTOS/tasks.o
+ .text.xTaskRemoveFromUnorderedEventList
+                0x00000000       0xa8 ./src/RTOS/tasks.o
+ .text.xTaskGetCurrentTaskHandle
+                0x00000000       0x20 ./src/RTOS/tasks.o
+ .text.vTaskPriorityInherit
+                0x00000000       0xbc ./src/RTOS/tasks.o
+ .text.uxTaskResetEventItemValue
+                0x00000000       0x30 ./src/RTOS/tasks.o
+ .text.pvTaskIncrementMutexHeldCount
+                0x00000000       0x28 ./src/RTOS/tasks.o
+ .text.xTaskNotifyWait
+                0x00000000       0xb4 ./src/RTOS/tasks.o
+ .text.xTaskGenericNotifyFromISR
+                0x00000000      0x168 ./src/RTOS/tasks.o
+ .text.vTaskNotifyGiveFromISR
+                0x00000000       0xfc ./src/RTOS/tasks.o
+ .text.xTaskNotifyStateClear
+                0x00000000       0x4c ./src/RTOS/tasks.o
+ .text          0x00000000        0x0 ./src/ADC_Module.o
+ .data          0x00000000        0x0 ./src/ADC_Module.o
+ .bss           0x00000000        0x0 ./src/ADC_Module.o
+ .text          0x00000000        0x0 ./src/LED_Module.o
+ .data          0x00000000        0x0 ./src/LED_Module.o
+ .bss           0x00000000        0x0 ./src/LED_Module.o
+ .text.LEDChangePixels
+                0x00000000      0x12c ./src/LED_Module.o
+ .text.LEDUpdateLayer
+                0x00000000       0xbc ./src/LED_Module.o
+ .text          0x00000000        0x0 ./src/main.o
+ .data          0x00000000        0x0 ./src/main.o
+ .bss           0x00000000        0x0 ./src/main.o
+ .bss.i.5887    0x00000000        0x4 ./src/main.o
+ COMMON         0x00000000        0x4 ./src/main.o
+ .text          0x00000000        0x0 ./src/startup_efm32lg.o
+ .data          0x00000000        0x0 ./src/startup_efm32lg.o
+ .bss           0x00000000        0x0 ./src/startup_efm32lg.o
+ .text          0x00000000        0x0 ./src/system_efm32lg.o
+ .data          0x00000000        0x0 ./src/system_efm32lg.o
+ .bss           0x00000000        0x0 ./src/system_efm32lg.o
+ .data.SystemHFXOClock
+                0x00000000        0x4 ./src/system_efm32lg.o
+ .data.SystemLFXOClock
+                0x00000000        0x4 ./src/system_efm32lg.o
+ .text.GetProdRev
+                0x00000000       0x1c ./src/system_efm32lg.o
+ .text.SystemCoreClockGet
+                0x00000000       0x48 ./src/system_efm32lg.o
+ .text.SystemHFClockGet
+                0x00000000       0xf0 ./src/system_efm32lg.o
+ .text.SystemHFXOClockGet
+                0x00000000       0x18 ./src/system_efm32lg.o
+ .text.SystemHFXOClockSet
+                0x00000000       0x2c ./src/system_efm32lg.o
+ .text.SystemLFRCOClockGet
+                0x00000000       0x14 ./src/system_efm32lg.o
+ .text.SystemULFRCOClockGet
+                0x00000000       0x14 ./src/system_efm32lg.o
+ .text.SystemLFXOClockGet
+                0x00000000       0x18 ./src/system_efm32lg.o
+ .text.SystemLFXOClockSet
+                0x00000000       0x2c ./src/system_efm32lg.o
+ COMMON         0x00000000        0x4 ./src/system_efm32lg.o
+ .text          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+ .data          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+ .text.exit     0x00000000       0x28 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+ .debug_frame   0x00000000       0x28 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+ .ARM.attributes
+                0x00000000       0x2d c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+ .text          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+ .data          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+ .data.impure_data
+                0x00000000       0x60 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x00000000        0x4 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+ .rodata.str1.1
+                0x00000000        0x2 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+ .rodata._global_impure_ptr
+                0x00000000        0x4 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000000       0x2d c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+ .text          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+ .data          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+ .text          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy.o)
+ .data          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy.o)
+ .text          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+ .data          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+ .text.memset   0x00000000       0x10 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x00000000       0x20 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x00000000       0x2d c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+ .text          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtend.o
+ .data          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtend.o
+ .bss           0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtend.o
+ .eh_frame      0x00000000        0x4 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtend.o
+ .jcr           0x00000000        0x4 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtend.o
+ .ARM.attributes
+                0x00000000       0x2d c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtend.o
+ .text          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtn.o
+ .data          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtn.o
+ .bss           0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x00000000         0x00020000         xr
+RAM              0x20000000         0x00008000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crti.o
+LOAD c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+LOAD c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+LOAD ./src/RTOS/heap_1.o
+LOAD ./src/RTOS/list.o
+LOAD ./src/RTOS/port.o
+LOAD ./src/RTOS/queue.o
+LOAD ./src/RTOS/tasks.o
+LOAD ./src/ADC_Module.o
+LOAD ./src/LED_Module.o
+LOAD ./src/main.o
+LOAD ./src/startup_efm32lg.o
+LOAD ./src/system_efm32lg.o
+START GROUP
+LOAD c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m\libgcc.a
+LOAD c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a
+LOAD c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libc_nano.a
+END GROUP
+START GROUP
+LOAD c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m\libgcc.a
+LOAD c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libc_nano.a
+END GROUP
+LOAD c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtend.o
+LOAD c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtn.o
+                0x20008000                _estack = 0x20008000
+                0x00000000                _Min_Heap_Size = 0x0
+                0x00000100                _Min_Stack_Size = 0x100
+
+.isr_vector     0x00000000       0xd8
+                0x00000000                . = ALIGN (0x4)
+ *(.isr_vector)
+ .isr_vector    0x00000000       0xd8 ./src/startup_efm32lg.o
+                0x00000000                InterruptVector
+                0x000000d8                . = ALIGN (0x4)
+
+.text           0x000000e0     0x1f10
+                0x000000e0                . = ALIGN (0x4)
+ *(.text)
+ .text          0x000000e0       0x5c c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+ *(.text*)
+ .text.pvPortMalloc
+                0x0000013c       0x8c ./src/RTOS/heap_1.o
+                0x0000013c                pvPortMalloc
+ .text.vPortFree
+                0x000001c8       0x1c ./src/RTOS/heap_1.o
+                0x000001c8                vPortFree
+ .text.vListInitialise
+                0x000001e4       0x40 ./src/RTOS/list.o
+                0x000001e4                vListInitialise
+ .text.vListInitialiseItem
+                0x00000224       0x18 ./src/RTOS/list.o
+                0x00000224                vListInitialiseItem
+ .text.vListInsertEnd
+                0x0000023c       0x48 ./src/RTOS/list.o
+                0x0000023c                vListInsertEnd
+ .text.vListInsert
+                0x00000284       0x70 ./src/RTOS/list.o
+                0x00000284                vListInsert
+ .text.uxListRemove
+                0x000002f4       0x54 ./src/RTOS/list.o
+                0x000002f4                uxListRemove
+ .text.pxPortInitialiseStack
+                0x00000348       0x58 ./src/RTOS/port.o
+                0x00000348                pxPortInitialiseStack
+ .text.prvTaskExitError
+                0x000003a0       0x2c ./src/RTOS/port.o
+ *fill*         0x000003cc        0x4 
+ .text.SVC_Handler
+                0x000003d0       0x30 ./src/RTOS/port.o
+                0x000003d0                SVC_Handler
+ .text.prvPortStartFirstTask
+                0x00000400       0x20 ./src/RTOS/port.o
+ .text.xPortStartScheduler
+                0x00000420       0xbc ./src/RTOS/port.o
+                0x00000420                xPortStartScheduler
+ .text.vPortEnterCritical
+                0x000004dc       0x48 ./src/RTOS/port.o
+                0x000004dc                vPortEnterCritical
+ .text.vPortExitCritical
+                0x00000524       0x3c ./src/RTOS/port.o
+                0x00000524                vPortExitCritical
+ .text.PendSV_Handler
+                0x00000560       0x50 ./src/RTOS/port.o
+                0x00000560                PendSV_Handler
+ .text.SysTick_Handler
+                0x000005b0       0x40 ./src/RTOS/port.o
+                0x000005b0                SysTick_Handler
+ .text.vPortSetupTimerInterrupt
+                0x000005f0       0x24 ./src/RTOS/port.o
+                0x000005f0                vPortSetupTimerInterrupt
+ .text.xQueueGenericReset
+                0x00000614       0xbc ./src/RTOS/queue.o
+                0x00000614                xQueueGenericReset
+ .text.xQueueGenericCreate
+                0x000006d0       0x60 ./src/RTOS/queue.o
+                0x000006d0                xQueueGenericCreate
+ .text.prvInitialiseNewQueue
+                0x00000730       0x3c ./src/RTOS/queue.o
+ .text.prvInitialiseMutex
+                0x0000076c       0x34 ./src/RTOS/queue.o
+ .text.xQueueCreateMutex
+                0x000007a0       0x30 ./src/RTOS/queue.o
+                0x000007a0                xQueueCreateMutex
+ .text.xQueueGenericSend
+                0x000007d0      0x1b4 ./src/RTOS/queue.o
+                0x000007d0                xQueueGenericSend
+ .text.prvCopyDataToQueue
+                0x00000984       0xd8 ./src/RTOS/queue.o
+ .text.prvUnlockQueue
+                0x00000a5c       0xa4 ./src/RTOS/queue.o
+ .text.prvIsQueueFull
+                0x00000b00       0x30 ./src/RTOS/queue.o
+ .text.xTaskCreate
+                0x00000b30       0x80 ./src/RTOS/tasks.o
+                0x00000b30                xTaskCreate
+ .text.prvInitialiseNewTask
+                0x00000bb0       0xe8 ./src/RTOS/tasks.o
+ .text.prvAddNewTaskToReadyList
+                0x00000c98       0xd4 ./src/RTOS/tasks.o
+ .text.vTaskDelay
+                0x00000d6c       0x54 ./src/RTOS/tasks.o
+                0x00000d6c                vTaskDelay
+ .text.vTaskStartScheduler
+                0x00000dc0       0x78 ./src/RTOS/tasks.o
+                0x00000dc0                vTaskStartScheduler
+ .text.vTaskSuspendAll
+                0x00000e38       0x1c ./src/RTOS/tasks.o
+                0x00000e38                vTaskSuspendAll
+ .text.xTaskResumeAll
+                0x00000e54      0x128 ./src/RTOS/tasks.o
+                0x00000e54                xTaskResumeAll
+ .text.xTaskIncrementTick
+                0x00000f7c      0x14c ./src/RTOS/tasks.o
+                0x00000f7c                xTaskIncrementTick
+ .text.vTaskSwitchContext
+                0x000010c8       0xa4 ./src/RTOS/tasks.o
+                0x000010c8                vTaskSwitchContext
+ .text.vTaskPlaceOnEventList
+                0x0000116c       0x34 ./src/RTOS/tasks.o
+                0x0000116c                vTaskPlaceOnEventList
+ .text.xTaskRemoveFromEventList
+                0x000011a0       0xb4 ./src/RTOS/tasks.o
+                0x000011a0                xTaskRemoveFromEventList
+ .text.vTaskSetTimeOutState
+                0x00001254       0x34 ./src/RTOS/tasks.o
+                0x00001254                vTaskSetTimeOutState
+ .text.xTaskCheckForTimeOut
+                0x00001288       0x98 ./src/RTOS/tasks.o
+                0x00001288                xTaskCheckForTimeOut
+ .text.vTaskMissedYield
+                0x00001320       0x18 ./src/RTOS/tasks.o
+                0x00001320                vTaskMissedYield
+ .text.prvIdleTask
+                0x00001338       0x30 ./src/RTOS/tasks.o
+ .text.prvInitialiseTaskLists
+                0x00001368       0x74 ./src/RTOS/tasks.o
+ .text.prvCheckTasksWaitingTermination
+                0x000013dc        0xc ./src/RTOS/tasks.o
+ .text.prvResetNextTaskUnblockTime
+                0x000013e8       0x48 ./src/RTOS/tasks.o
+ .text.xTaskGetSchedulerState
+                0x00001430       0x3c ./src/RTOS/tasks.o
+                0x00001430                xTaskGetSchedulerState
+ .text.xTaskPriorityDisinherit
+                0x0000146c       0xb4 ./src/RTOS/tasks.o
+                0x0000146c                xTaskPriorityDisinherit
+ .text.ulTaskNotifyTake
+                0x00001520       0x90 ./src/RTOS/tasks.o
+                0x00001520                ulTaskNotifyTake
+ .text.xTaskGenericNotify
+                0x000015b0      0x120 ./src/RTOS/tasks.o
+                0x000015b0                xTaskGenericNotify
+ .text.prvAddCurrentTaskToDelayedList
+                0x000016d0       0xa8 ./src/RTOS/tasks.o
+ .text.SingleRead
+                0x00001778       0x4c ./src/ADC_Module.o
+ .text.ADTask   0x000017c4      0x144 ./src/ADC_Module.o
+                0x000017c4                ADTask
+ .text.LEDTask  0x00001908      0x148 ./src/LED_Module.o
+                0x00001908                LEDTask
+ .text.ChangeLED
+                0x00001a50       0x60 ./src/LED_Module.o
+ .text.ButtonPress
+                0x00001ab0       0x2c ./src/main.o
+                0x00001ab0                ButtonPress
+ .text.ButtonRelease
+                0x00001adc       0x30 ./src/main.o
+                0x00001adc                ButtonRelease
+ .text.ButtonTask
+                0x00001b0c       0xd4 ./src/main.o
+                0x00001b0c                ButtonTask
+ .text.ChangePWMDC
+                0x00001be0       0xf4 ./src/main.o
+                0x00001be0                ChangePWMDC
+ .text.PWMTask  0x00001cd4      0x100 ./src/main.o
+                0x00001cd4                PWMTask
+ .text.main     0x00001dd4       0xec ./src/main.o
+                0x00001dd4                main
+ .text.Default_Handler
+                0x00001ec0        0x8 ./src/startup_efm32lg.o
+                0x00001ec0                TIMER2_IRQHandler
+                0x00001ec0                USART0_TX_IRQHandler
+                0x00001ec0                I2C0_IRQHandler
+                0x00001ec0                LEUART1_IRQHandler
+                0x00001ec0                USART1_RX_IRQHandler
+                0x00001ec0                NMI_Handler
+                0x00001ec0                I2C1_IRQHandler
+                0x00001ec0                TIMER3_IRQHandler
+                0x00001ec0                USART1_TX_IRQHandler
+                0x00001ec0                MSC_IRQHandler
+                0x00001ec0                ADC0_IRQHandler
+                0x00001ec0                UsageFault_Handler
+                0x00001ec0                LEUART0_IRQHandler
+                0x00001ec0                GPIO_EVEN_IRQHandler
+                0x00001ec0                UART0_TX_IRQHandler
+                0x00001ec0                UART1_TX_IRQHandler
+                0x00001ec0                RTC_IRQHandler
+                0x00001ec0                TIMER0_IRQHandler
+                0x00001ec0                LCD_IRQHandler
+                0x00001ec0                PCNT2_IRQHandler
+                0x00001ec0                UART0_RX_IRQHandler
+                0x00001ec0                LETIMER0_IRQHandler
+                0x00001ec0                TIMER1_IRQHandler
+                0x00001ec0                USART2_RX_IRQHandler
+                0x00001ec0                Default_Handler
+                0x00001ec0                PCNT0_IRQHandler
+                0x00001ec0                USB_IRQHandler
+                0x00001ec0                BURTC_IRQHandler
+                0x00001ec0                PCNT1_IRQHandler
+                0x00001ec0                ACMP0_IRQHandler
+                0x00001ec0                USART0_RX_IRQHandler
+                0x00001ec0                MemManage_Handler
+                0x00001ec0                DAC0_IRQHandler
+                0x00001ec0                UART1_RX_IRQHandler
+                0x00001ec0                CMU_IRQHandler
+                0x00001ec0                EBI_IRQHandler
+                0x00001ec0                LESENSE_IRQHandler
+                0x00001ec0                GPIO_ODD_IRQHandler
+                0x00001ec0                AES_IRQHandler
+                0x00001ec0                VCMP_IRQHandler
+                0x00001ec0                DMA_IRQHandler
+                0x00001ec0                BusFault_Handler
+                0x00001ec0                USART2_TX_IRQHandler
+                0x00001ec0                DebugMonitor_Handler
+ .text.Default_HandlerHF
+                0x00001ec8       0x2c ./src/startup_efm32lg.o
+                0x00001ec8                Default_HandlerHF
+                0x00001ec8                HardFault_Handler
+ .text.Reset_Handler
+                0x00001ef4       0x58 ./src/startup_efm32lg.o
+                0x00001ef4                Reset_Handler
+ .text.SystemInit
+                0x00001f4c        0xc ./src/system_efm32lg.o
+                0x00001f4c                SystemInit
+ .text.__libc_init_array
+                0x00001f58       0x4c c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+                0x00001f58                __libc_init_array
+ .text.memcpy   0x00001fa4       0x16 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy.o)
+                0x00001fa4                memcpy
+ *(.rodata)
+ *fill*         0x00001fba        0x2 
+ .rodata        0x00001fbc        0x8 ./src/RTOS/tasks.o
+ .rodata        0x00001fc4       0x14 ./src/main.o
+ *(.rodata*)
+ *(.glue_7)
+ .glue_7        0x00000000        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x00000000        0x0 linker stubs
+ *(.eh_frame)
+ .eh_frame      0x00001fd8        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+ *(.init)
+ .init          0x00001fd8        0x4 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crti.o
+                0x00001fd8                _init
+ .init          0x00001fdc        0x8 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtn.o
+ *(.fini)
+ .fini          0x00001fe4        0x4 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crti.o
+                0x00001fe4                _fini
+ .fini          0x00001fe8        0x8 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtn.o
+                0x00001ff0                . = ALIGN (0x4)
+                0x00001ff0                _etext = .
+
+.vfp11_veneer   0x00001ff0        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00001ff0        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x00001ff0        0x0
+ .iplt          0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+
+.rel.dyn        0x00001ff0        0x0
+ .rel.iplt      0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+
+.ARM            0x00001ff0        0x0
+                0x00001ff0                __exidx_start = .
+ *(.ARM.exidx*)
+                0x00001ff0                __exidx_end = .
+
+.preinit_array  0x00001ff0        0x0
+                0x00001ff0                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array*)
+                0x00001ff0                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x00001ff0        0x4
+                0x00001ff0                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array*)
+ .init_array    0x00001ff0        0x4 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+                0x00001ff4                PROVIDE (__init_array_end, .)
+
+.fini_array     0x00001ff4        0x4
+                0x00001ff4                PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*))
+ *(.fini_array*)
+ .fini_array    0x00001ff4        0x4 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+                0x00001ff8                PROVIDE (__fini_array_end, .)
+                0x00001ff8                _sidata = LOADADDR (.data)
+
+.data           0x20000000        0x8 load address 0x00001ff8
+                0x20000000                . = ALIGN (0x4)
+                0x20000000                _sdata = .
+ *(.data)
+ *(.data*)
+ .data.uxCriticalNesting
+                0x20000000        0x4 ./src/RTOS/port.o
+ .data.LEDLayerRed
+                0x20000004        0x1 ./src/LED_Module.o
+ .data.LEDLayerGreen
+                0x20000005        0x1 ./src/LED_Module.o
+ .data.LEDLayerBlue
+                0x20000006        0x1 ./src/LED_Module.o
+                0x20000008                . = ALIGN (0x4)
+ *fill*         0x20000007        0x1 
+                0x20000008                _edata = .
+
+.jcr            0x20000008        0x0 load address 0x00002000
+ .jcr           0x20000008        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+
+.igot.plt       0x20000008        0x0 load address 0x00002000
+ .igot.plt      0x00000000        0x0 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+                0x20000008                . = ALIGN (0x4)
+
+.bss            0x20000008     0x41b4 load address 0x00002000
+                0x20000008                _sbss = .
+                0x20000008                __bss_start__ = _sbss
+ *(.bss)
+ .bss           0x20000008       0x1c c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+ *(.bss*)
+ .bss.ucHeap    0x20000024     0x4000 ./src/RTOS/heap_1.o
+ .bss.xNextFreeByte
+                0x20004024        0x4 ./src/RTOS/heap_1.o
+ .bss.pucAlignedHeap.5029
+                0x20004028        0x4 ./src/RTOS/heap_1.o
+ .bss.ucMaxSysCallPriority
+                0x2000402c        0x1 ./src/RTOS/port.o
+ *fill*         0x2000402d        0x3 
+ .bss.ulMaxPRIGROUPValue
+                0x20004030        0x4 ./src/RTOS/port.o
+ .bss.pxCurrentTCB
+                0x20004034        0x4 ./src/RTOS/tasks.o
+                0x20004034                pxCurrentTCB
+ .bss.pxReadyTasksLists
+                0x20004038       0xc8 ./src/RTOS/tasks.o
+ .bss.xDelayedTaskList1
+                0x20004100       0x14 ./src/RTOS/tasks.o
+ .bss.xDelayedTaskList2
+                0x20004114       0x14 ./src/RTOS/tasks.o
+ .bss.pxDelayedTaskList
+                0x20004128        0x4 ./src/RTOS/tasks.o
+ .bss.pxOverflowDelayedTaskList
+                0x2000412c        0x4 ./src/RTOS/tasks.o
+ .bss.xPendingReadyList
+                0x20004130       0x14 ./src/RTOS/tasks.o
+ .bss.xSuspendedTaskList
+                0x20004144       0x14 ./src/RTOS/tasks.o
+ .bss.uxCurrentNumberOfTasks
+                0x20004158        0x4 ./src/RTOS/tasks.o
+ .bss.xTickCount
+                0x2000415c        0x4 ./src/RTOS/tasks.o
+ .bss.uxTopReadyPriority
+                0x20004160        0x4 ./src/RTOS/tasks.o
+ .bss.xSchedulerRunning
+                0x20004164        0x4 ./src/RTOS/tasks.o
+ .bss.uxPendedTicks
+                0x20004168        0x4 ./src/RTOS/tasks.o
+ .bss.xYieldPending
+                0x2000416c        0x4 ./src/RTOS/tasks.o
+ .bss.xNumOfOverflows
+                0x20004170        0x4 ./src/RTOS/tasks.o
+ .bss.uxTaskNumber
+                0x20004174        0x4 ./src/RTOS/tasks.o
+ .bss.xNextTaskUnblockTime
+                0x20004178        0x4 ./src/RTOS/tasks.o
+ .bss.xIdleTaskHandle
+                0x2000417c        0x4 ./src/RTOS/tasks.o
+ .bss.uxSchedulerSuspended
+                0x20004180        0x4 ./src/RTOS/tasks.o
+ .bss.xLEDTask  0x20004184        0x4 ./src/main.o
+                0x20004184                xLEDTask
+ .bss.xPWMTask  0x20004188        0x4 ./src/main.o
+                0x20004188                xPWMTask
+ .bss.xDACTask  0x2000418c        0x4 ./src/main.o
+                0x2000418c                xDACTask
+ *(COMMON)
+ COMMON         0x20004190       0x2c ./src/ADC_Module.o
+                0x20004190                PuffSem
+                0x20004194                LEDRedMut
+                0x20004198                Outv
+                0x2000419c                OutiCalc
+                0x200041a0                BatTemp
+                0x200041a4                Outi
+                0x200041a8                LEDSem
+                0x200041ac                LEDGreenMut
+                0x200041b0                Battery
+                0x200041b4                Vref
+                0x200041b8                LEDBlueMut
+                0x200041bc                . = ALIGN (0x4)
+                0x200041bc                _ebss = .
+                0x200041bc                __bss_end__ = _ebss
+
+._user_heap_stack
+                0x200041bc      0x100 load address 0x00002000
+                0x200041bc                . = ALIGN (0x4)
+                0x200041bc                PROVIDE (end, .)
+                0x200041bc                PROVIDE (_end, .)
+                0x200041bc                . = (. + _Min_Heap_Size)
+                0x200042bc                . = (. + _Min_Stack_Size)
+ *fill*         0x200041bc      0x100 
+                0x200042bc                . = ALIGN (0x4)
+
+/DISCARD/
+ libc.a(*)
+ libm.a(*)
+ libgcc.a(*)
+
+.ARM.attributes
+                0x00000000       0x29
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x1d c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crti.o
+ .ARM.attributes
+                0x0000001d       0x2d c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+ .ARM.attributes
+                0x0000004a       0x33 ./src/RTOS/heap_1.o
+ .ARM.attributes
+                0x0000007d       0x33 ./src/RTOS/list.o
+ .ARM.attributes
+                0x000000b0       0x33 ./src/RTOS/port.o
+ .ARM.attributes
+                0x000000e3       0x33 ./src/RTOS/queue.o
+ .ARM.attributes
+                0x00000116       0x33 ./src/RTOS/tasks.o
+ .ARM.attributes
+                0x00000149       0x33 ./src/ADC_Module.o
+ .ARM.attributes
+                0x0000017c       0x33 ./src/LED_Module.o
+ .ARM.attributes
+                0x000001af       0x33 ./src/main.o
+ .ARM.attributes
+                0x000001e2       0x33 ./src/startup_efm32lg.o
+ .ARM.attributes
+                0x00000215       0x33 ./src/system_efm32lg.o
+ .ARM.attributes
+                0x00000248       0x2d c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+ .ARM.attributes
+                0x00000275       0x2d c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy.o)
+ .ARM.attributes
+                0x000002a2       0x1d c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtn.o
+OUTPUT(EFM32LG330F128.elf elf32-littlearm)
+
+.debug_info     0x00000000     0x4396
+ .debug_info    0x00000000      0x17c ./src/RTOS/heap_1.o
+ .debug_info    0x0000017c      0x29d ./src/RTOS/list.o
+ .debug_info    0x00000419      0x3a3 ./src/RTOS/port.o
+ .debug_info    0x000007bc      0xdaa ./src/RTOS/queue.o
+ .debug_info    0x00001566     0x1214 ./src/RTOS/tasks.o
+ .debug_info    0x0000277a      0x49a ./src/ADC_Module.o
+ .debug_info    0x00002c14      0x44d ./src/LED_Module.o
+ .debug_info    0x00003061      0x8f3 ./src/main.o
+ .debug_info    0x00003954      0x553 ./src/startup_efm32lg.o
+ .debug_info    0x00003ea7      0x4ef ./src/system_efm32lg.o
+
+.debug_abbrev   0x00000000     0x101d
+ .debug_abbrev  0x00000000       0xee ./src/RTOS/heap_1.o
+ .debug_abbrev  0x000000ee       0xbe ./src/RTOS/list.o
+ .debug_abbrev  0x000001ac      0x1e2 ./src/RTOS/port.o
+ .debug_abbrev  0x0000038e      0x213 ./src/RTOS/queue.o
+ .debug_abbrev  0x000005a1      0x29c ./src/RTOS/tasks.o
+ .debug_abbrev  0x0000083d      0x140 ./src/ADC_Module.o
+ .debug_abbrev  0x0000097d      0x154 ./src/LED_Module.o
+ .debug_abbrev  0x00000ad1      0x20f ./src/main.o
+ .debug_abbrev  0x00000ce0      0x19a ./src/startup_efm32lg.o
+ .debug_abbrev  0x00000e7a      0x1a3 ./src/system_efm32lg.o
+
+.debug_aranges  0x00000000      0x480
+ .debug_aranges
+                0x00000000       0x38 ./src/RTOS/heap_1.o
+ .debug_aranges
+                0x00000038       0x40 ./src/RTOS/list.o
+ .debug_aranges
+                0x00000078       0x78 ./src/RTOS/port.o
+ .debug_aranges
+                0x000000f0       0xe0 ./src/RTOS/queue.o
+ .debug_aranges
+                0x000001d0      0x170 ./src/RTOS/tasks.o
+ .debug_aranges
+                0x00000340       0x28 ./src/ADC_Module.o
+ .debug_aranges
+                0x00000368       0x38 ./src/LED_Module.o
+ .debug_aranges
+                0x000003a0       0x48 ./src/main.o
+ .debug_aranges
+                0x000003e8       0x30 ./src/startup_efm32lg.o
+ .debug_aranges
+                0x00000418       0x68 ./src/system_efm32lg.o
+
+.debug_ranges   0x00000000      0x3e0
+ .debug_ranges  0x00000000       0x28 ./src/RTOS/heap_1.o
+ .debug_ranges  0x00000028       0x30 ./src/RTOS/list.o
+ .debug_ranges  0x00000058       0x68 ./src/RTOS/port.o
+ .debug_ranges  0x000000c0       0xd0 ./src/RTOS/queue.o
+ .debug_ranges  0x00000190      0x160 ./src/RTOS/tasks.o
+ .debug_ranges  0x000002f0       0x18 ./src/ADC_Module.o
+ .debug_ranges  0x00000308       0x28 ./src/LED_Module.o
+ .debug_ranges  0x00000330       0x38 ./src/main.o
+ .debug_ranges  0x00000368       0x20 ./src/startup_efm32lg.o
+ .debug_ranges  0x00000388       0x58 ./src/system_efm32lg.o
+
+.debug_line     0x00000000     0x2595
+ .debug_line    0x00000000      0x1c9 ./src/RTOS/heap_1.o
+ .debug_line    0x000001c9      0x1c4 ./src/RTOS/list.o
+ .debug_line    0x0000038d      0x2a7 ./src/RTOS/port.o
+ .debug_line    0x00000634      0x742 ./src/RTOS/queue.o
+ .debug_line    0x00000d76      0x9b6 ./src/RTOS/tasks.o
+ .debug_line    0x0000172c      0x2a0 ./src/ADC_Module.o
+ .debug_line    0x000019cc      0x331 ./src/LED_Module.o
+ .debug_line    0x00001cfd      0x3a4 ./src/main.o
+ .debug_line    0x000020a1      0x25f ./src/startup_efm32lg.o
+ .debug_line    0x00002300      0x295 ./src/system_efm32lg.o
+
+.debug_str      0x00000000     0x1928
+ .debug_str     0x00000000      0x1ef ./src/RTOS/heap_1.o
+                                0x239 (size before relaxing)
+ .debug_str     0x000001ef      0x147 ./src/RTOS/list.o
+                                0x2e2 (size before relaxing)
+ .debug_str     0x00000336      0x237 ./src/RTOS/port.o
+                                0x3f0 (size before relaxing)
+ .debug_str     0x0000056d      0x4ab ./src/RTOS/queue.o
+                                0x76c (size before relaxing)
+ .debug_str     0x00000a18      0x823 ./src/RTOS/tasks.o
+                                0xbce (size before relaxing)
+ .debug_str     0x0000123b      0x1bd ./src/ADC_Module.o
+                                0x3d6 (size before relaxing)
+ .debug_str     0x000013f8       0xc9 ./src/LED_Module.o
+                                0x3b7 (size before relaxing)
+ .debug_str     0x000014c1      0x284 ./src/main.o
+                                0x5cd (size before relaxing)
+ .debug_str     0x00001745       0xe7 ./src/startup_efm32lg.o
+                                0x3af (size before relaxing)
+ .debug_str     0x0000182c       0xfc ./src/system_efm32lg.o
+                                0x45b (size before relaxing)
+
+.comment        0x00000000       0x70
+ .comment       0x00000000       0x70 ./src/RTOS/heap_1.o
+                                 0x71 (size before relaxing)
+ .comment       0x00000000       0x71 ./src/RTOS/list.o
+ .comment       0x00000000       0x71 ./src/RTOS/port.o
+ .comment       0x00000000       0x71 ./src/RTOS/queue.o
+ .comment       0x00000000       0x71 ./src/RTOS/tasks.o
+ .comment       0x00000000       0x71 ./src/ADC_Module.o
+ .comment       0x00000000       0x71 ./src/LED_Module.o
+ .comment       0x00000000       0x71 ./src/main.o
+ .comment       0x00000000       0x71 ./src/startup_efm32lg.o
+ .comment       0x00000000       0x71 ./src/system_efm32lg.o
+
+.debug_frame    0x00000000     0x11e0
+ .debug_frame   0x00000000       0xa8 ./src/RTOS/heap_1.o
+ .debug_frame   0x000000a8       0xd8 ./src/RTOS/list.o
+ .debug_frame   0x00000180      0x194 ./src/RTOS/port.o
+ .debug_frame   0x00000314      0x3fc ./src/RTOS/queue.o
+ .debug_frame   0x00000710      0x6ac ./src/RTOS/tasks.o
+ .debug_frame   0x00000dbc       0x58 ./src/ADC_Module.o
+ .debug_frame   0x00000e14       0xac ./src/LED_Module.o
+ .debug_frame   0x00000ec0       0xe0 ./src/main.o
+ .debug_frame   0x00000fa0       0x64 ./src/startup_efm32lg.o
+ .debug_frame   0x00001004      0x188 ./src/system_efm32lg.o
+ .debug_frame   0x0000118c       0x2c c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+ .debug_frame   0x000011b8       0x28 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy.o)
+
+Cross Reference Table
+
+Symbol                                            File
+ACMP0_IRQHandler                                  ./src/startup_efm32lg.o
+ADC0_IRQHandler                                   ./src/startup_efm32lg.o
+ADTask                                            ./src/ADC_Module.o
+                                                  ./src/main.o
+AES_IRQHandler                                    ./src/startup_efm32lg.o
+BURTC_IRQHandler                                  ./src/startup_efm32lg.o
+BatTemp                                           ./src/ADC_Module.o
+Battery                                           ./src/ADC_Module.o
+BusFault_Handler                                  ./src/startup_efm32lg.o
+ButtonPress                                       ./src/main.o
+ButtonRelease                                     ./src/main.o
+ButtonTask                                        ./src/main.o
+CMU_IRQHandler                                    ./src/startup_efm32lg.o
+ChangePWMDC                                       ./src/main.o
+DAC0_IRQHandler                                   ./src/startup_efm32lg.o
+DMA_IRQHandler                                    ./src/startup_efm32lg.o
+DebugMonitor_Handler                              ./src/startup_efm32lg.o
+Default_Handler                                   ./src/startup_efm32lg.o
+Default_HandlerHF                                 ./src/startup_efm32lg.o
+EBI_IRQHandler                                    ./src/startup_efm32lg.o
+GPIO_EVEN_IRQHandler                              ./src/startup_efm32lg.o
+GPIO_ODD_IRQHandler                               ./src/startup_efm32lg.o
+HardFault_Handler                                 ./src/startup_efm32lg.o
+HighWaterMark                                     ./src/main.o
+I2C0_IRQHandler                                   ./src/startup_efm32lg.o
+I2C1_IRQHandler                                   ./src/startup_efm32lg.o
+InterruptVector                                   ./src/startup_efm32lg.o
+LCD_IRQHandler                                    ./src/startup_efm32lg.o
+LEDBlueMut                                        ./src/startup_efm32lg.o
+                                                  ./src/main.o
+                                                  ./src/LED_Module.o
+                                                  ./src/ADC_Module.o
+LEDChangePixels                                   ./src/LED_Module.o
+LEDGreenMut                                       ./src/startup_efm32lg.o
+                                                  ./src/main.o
+                                                  ./src/LED_Module.o
+                                                  ./src/ADC_Module.o
+LEDRedMut                                         ./src/startup_efm32lg.o
+                                                  ./src/main.o
+                                                  ./src/LED_Module.o
+                                                  ./src/ADC_Module.o
+LEDSem                                            ./src/startup_efm32lg.o
+                                                  ./src/main.o
+                                                  ./src/LED_Module.o
+                                                  ./src/ADC_Module.o
+LEDTask                                           ./src/LED_Module.o
+                                                  ./src/main.o
+LEDUpdateLayer                                    ./src/LED_Module.o
+LESENSE_IRQHandler                                ./src/startup_efm32lg.o
+LETIMER0_IRQHandler                               ./src/startup_efm32lg.o
+LEUART0_IRQHandler                                ./src/startup_efm32lg.o
+LEUART1_IRQHandler                                ./src/startup_efm32lg.o
+MSC_IRQHandler                                    ./src/startup_efm32lg.o
+MemManage_Handler                                 ./src/startup_efm32lg.o
+NMI_Handler                                       ./src/startup_efm32lg.o
+Outi                                              ./src/ADC_Module.o
+OutiCalc                                          ./src/ADC_Module.o
+Outv                                              ./src/ADC_Module.o
+PCNT0_IRQHandler                                  ./src/startup_efm32lg.o
+PCNT1_IRQHandler                                  ./src/startup_efm32lg.o
+PCNT2_IRQHandler                                  ./src/startup_efm32lg.o
+PWMTask                                           ./src/main.o
+PendSV_Handler                                    ./src/RTOS/port.o
+PuffSem                                           ./src/startup_efm32lg.o
+                                                  ./src/main.o
+                                                  ./src/LED_Module.o
+                                                  ./src/ADC_Module.o
+RTC_IRQHandler                                    ./src/startup_efm32lg.o
+Reset_Handler                                     ./src/startup_efm32lg.o
+SVC_Handler                                       ./src/RTOS/port.o
+SysTick_Handler                                   ./src/RTOS/port.o
+SystemCoreClock                                   ./src/system_efm32lg.o
+SystemCoreClockGet                                ./src/system_efm32lg.o
+SystemHFClockGet                                  ./src/system_efm32lg.o
+SystemHFXOClockGet                                ./src/system_efm32lg.o
+SystemHFXOClockSet                                ./src/system_efm32lg.o
+SystemInit                                        ./src/system_efm32lg.o
+                                                  ./src/startup_efm32lg.o
+SystemLFRCOClockGet                               ./src/system_efm32lg.o
+SystemLFXOClockGet                                ./src/system_efm32lg.o
+SystemLFXOClockSet                                ./src/system_efm32lg.o
+SystemULFRCOClockGet                              ./src/system_efm32lg.o
+TIMER0_IRQHandler                                 ./src/startup_efm32lg.o
+TIMER1_IRQHandler                                 ./src/startup_efm32lg.o
+TIMER2_IRQHandler                                 ./src/startup_efm32lg.o
+TIMER3_IRQHandler                                 ./src/startup_efm32lg.o
+UART0_RX_IRQHandler                               ./src/startup_efm32lg.o
+UART0_TX_IRQHandler                               ./src/startup_efm32lg.o
+UART1_RX_IRQHandler                               ./src/startup_efm32lg.o
+UART1_TX_IRQHandler                               ./src/startup_efm32lg.o
+USART0_RX_IRQHandler                              ./src/startup_efm32lg.o
+USART0_TX_IRQHandler                              ./src/startup_efm32lg.o
+USART1_RX_IRQHandler                              ./src/startup_efm32lg.o
+USART1_TX_IRQHandler                              ./src/startup_efm32lg.o
+USART2_RX_IRQHandler                              ./src/startup_efm32lg.o
+USART2_TX_IRQHandler                              ./src/startup_efm32lg.o
+USB_IRQHandler                                    ./src/startup_efm32lg.o
+UsageFault_Handler                                ./src/startup_efm32lg.o
+VCMP_IRQHandler                                   ./src/startup_efm32lg.o
+Vref                                              ./src/ADC_Module.o
+_Jv_RegisterClasses                               c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+__bss_end__                                       c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+__bss_start__                                     c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+__call_exitprocs                                  c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+__deregister_frame_info                           c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+__dso_handle                                      c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+__init_array_end                                  c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+__init_array_start                                c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+__libc_fini_array                                 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+__libc_init_array                                 c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+                                                  ./src/startup_efm32lg.o
+                                                  c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+__preinit_array_end                               c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+__preinit_array_start                             c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+__register_frame_info                             c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crtbegin.o
+__sf_fake_stderr                                  c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+__sf_fake_stdin                                   c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+__sf_fake_stdout                                  c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+__stack                                           c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+_ebss                                             ./src/startup_efm32lg.o
+_edata                                            ./src/startup_efm32lg.o
+_estack                                           ./src/startup_efm32lg.o
+_exit                                             c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+_fini                                             c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crti.o
+_global_impure_ptr                                c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+                                                  c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+_impure_ptr                                       c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+_init                                             c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7-m/crti.o
+                                                  c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+_mainCRTStartup                                   c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+_sbss                                             ./src/startup_efm32lg.o
+_sdata                                            ./src/startup_efm32lg.o
+_sidata                                           ./src/startup_efm32lg.o
+_start                                            c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+atexit                                            c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+exit                                              c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-exit.o)
+                                                  c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+hardware_init_hook                                c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+main                                              ./src/main.o
+                                                  ./src/startup_efm32lg.o
+                                                  c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+memcpy                                            c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy.o)
+                                                  ./src/RTOS/queue.o
+memset                                            c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+                                                  c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+pcQueueGetName                                    ./src/RTOS/queue.o
+pcTaskGetName                                     ./src/RTOS/tasks.o
+pvPortMalloc                                      ./src/RTOS/heap_1.o
+                                                  ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+pvTaskIncrementMutexHeldCount                     ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+pxCurrentTCB                                      ./src/RTOS/tasks.o
+                                                  ./src/RTOS/port.o
+pxPortInitialiseStack                             ./src/RTOS/port.o
+                                                  ./src/RTOS/tasks.o
+software_init_hook                                c:/program files (x86)/emprog/thunderbench-arm-v3.85/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ulTaskNotifyTake                                  ./src/RTOS/tasks.o
+                                                  ./src/main.o
+                                                  ./src/LED_Module.o
+uxListRemove                                      ./src/RTOS/list.o
+                                                  ./src/RTOS/tasks.o
+uxQueueMessagesWaiting                            ./src/RTOS/queue.o
+uxQueueMessagesWaitingFromISR                     ./src/RTOS/queue.o
+uxQueueSpacesAvailable                            ./src/RTOS/queue.o
+uxTaskGetNumberOfTasks                            ./src/RTOS/tasks.o
+uxTaskResetEventItemValue                         ./src/RTOS/tasks.o
+vListInitialise                                   ./src/RTOS/list.o
+                                                  ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+vListInitialiseItem                               ./src/RTOS/list.o
+                                                  ./src/RTOS/tasks.o
+vListInsert                                       ./src/RTOS/list.o
+                                                  ./src/RTOS/tasks.o
+vListInsertEnd                                    ./src/RTOS/list.o
+                                                  ./src/RTOS/tasks.o
+vPortEndScheduler                                 ./src/RTOS/port.o
+                                                  ./src/RTOS/tasks.o
+vPortEnterCritical                                ./src/RTOS/port.o
+                                                  ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+vPortExitCritical                                 ./src/RTOS/port.o
+                                                  ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+vPortFree                                         ./src/RTOS/heap_1.o
+                                                  ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+vPortInitialiseBlocks                             ./src/RTOS/heap_1.o
+vPortSetupTimerInterrupt                          ./src/RTOS/port.o
+vPortValidateInterruptPriority                    ./src/RTOS/port.o
+                                                  ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+vQueueAddToRegistry                               ./src/RTOS/queue.o
+vQueueDelete                                      ./src/RTOS/queue.o
+vQueueUnregisterQueue                             ./src/RTOS/queue.o
+vTaskDelay                                        ./src/RTOS/tasks.o
+                                                  ./src/main.o
+                                                  ./src/LED_Module.o
+                                                  ./src/ADC_Module.o
+vTaskDelayUntil                                   ./src/RTOS/tasks.o
+vTaskEndScheduler                                 ./src/RTOS/tasks.o
+vTaskMissedYield                                  ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+vTaskNotifyGiveFromISR                            ./src/RTOS/tasks.o
+vTaskPlaceOnEventList                             ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+vTaskPlaceOnUnorderedEventList                    ./src/RTOS/tasks.o
+vTaskPriorityInherit                              ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+vTaskResume                                       ./src/RTOS/tasks.o
+vTaskSetTimeOutState                              ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+vTaskStartScheduler                               ./src/RTOS/tasks.o
+                                                  ./src/main.o
+vTaskSuspend                                      ./src/RTOS/tasks.o
+vTaskSuspendAll                                   ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+                                                  ./src/RTOS/heap_1.o
+vTaskSwitchContext                                ./src/RTOS/tasks.o
+                                                  ./src/RTOS/port.o
+xDACTask                                          ./src/main.o
+                                                  ./src/ADC_Module.o
+xLEDTask                                          ./src/main.o
+xPWMTask                                          ./src/main.o
+xPortGetFreeHeapSize                              ./src/RTOS/heap_1.o
+xPortStartScheduler                               ./src/RTOS/port.o
+                                                  ./src/RTOS/tasks.o
+xQueueCreateMutex                                 ./src/RTOS/queue.o
+                                                  ./src/LED_Module.o
+xQueueGenericCreate                               ./src/RTOS/queue.o
+                                                  ./src/main.o
+xQueueGenericReceive                              ./src/RTOS/queue.o
+                                                  ./src/LED_Module.o
+xQueueGenericReset                                ./src/RTOS/queue.o
+xQueueGenericSend                                 ./src/RTOS/queue.o
+                                                  ./src/LED_Module.o
+xQueueGenericSendFromISR                          ./src/RTOS/queue.o
+xQueueGiveFromISR                                 ./src/RTOS/queue.o
+xQueueIsQueueEmptyFromISR                         ./src/RTOS/queue.o
+xQueueIsQueueFullFromISR                          ./src/RTOS/queue.o
+xQueuePeekFromISR                                 ./src/RTOS/queue.o
+xQueueReceiveFromISR                              ./src/RTOS/queue.o
+xQueueRegistry                                    ./src/RTOS/queue.o
+xTaskCheckForTimeOut                              ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+xTaskCreate                                       ./src/RTOS/tasks.o
+                                                  ./src/main.o
+xTaskGenericNotify                                ./src/RTOS/tasks.o
+                                                  ./src/ADC_Module.o
+xTaskGenericNotifyFromISR                         ./src/RTOS/tasks.o
+xTaskGetCurrentTaskHandle                         ./src/RTOS/tasks.o
+xTaskGetSchedulerState                            ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+xTaskGetTickCount                                 ./src/RTOS/tasks.o
+xTaskGetTickCountFromISR                          ./src/RTOS/tasks.o
+xTaskIncrementTick                                ./src/RTOS/tasks.o
+                                                  ./src/RTOS/port.o
+xTaskNotifyStateClear                             ./src/RTOS/tasks.o
+xTaskNotifyWait                                   ./src/RTOS/tasks.o
+xTaskPriorityDisinherit                           ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+xTaskRemoveFromEventList                          ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+xTaskRemoveFromUnorderedEventList                 ./src/RTOS/tasks.o
+xTaskResumeAll                                    ./src/RTOS/tasks.o
+                                                  ./src/RTOS/queue.o
+                                                  ./src/RTOS/heap_1.o
+xTaskResumeFromISR                                ./src/RTOS/tasks.o

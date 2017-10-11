@@ -1,0 +1,380 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"ADC_Module.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.comm	PuffSem,4,4
+  19              		.comm	LEDSem,4,4
+  20              		.comm	LEDRedMut,4,4
+  21              		.comm	LEDGreenMut,4,4
+  22              		.comm	LEDBlueMut,4,4
+  23              		.comm	Vref,4,4
+  24              		.comm	Battery,4,4
+  25              		.comm	Outv,4,4
+  26              		.comm	Outi,4,4
+  27              		.comm	OutiCalc,4,4
+  28              		.comm	BatTemp,4,4
+  29              		.section	.text.SingleRead,"ax",%progbits
+  30              		.align	2
+  31              		.thumb
+  32              		.thumb_func
+  34              	SingleRead:
+  35              	.LFB61:
+  36              		.file 1 "../src/ADC_Module.c"
+   1:../src/ADC_Module.c **** /******************************************************************************
+   2:../src/ADC_Module.c **** 
+   3:../src/ADC_Module.c ****  *      ADC_Module.c
+   4:../src/ADC_Module.c ****  *      Description:    This file contains all the LED UI related resources.
+   5:../src/ADC_Module.c ****  *      Engineer:       Riley Culligan
+   6:../src/ADC_Module.c ****  *      Date Created:   12/1/2015
+   7:../src/ADC_Module.c ****  */
+   8:../src/ADC_Module.c **** /******************************************************************************
+   9:../src/ADC_Module.c ****  * Includes and defines
+  10:../src/ADC_Module.c ****  */
+  11:../src/ADC_Module.c **** #include "../Libraries/includes.h"
+  12:../src/ADC_Module.c **** 
+  13:../src/ADC_Module.c **** #define ADC_NOT_READY   (ADC0->STATUS & 1)
+  14:../src/ADC_Module.c **** #define ADC_VOLTS       (ADC_DATA*2500/0xffff)
+  15:../src/ADC_Module.c **** #define ADC0_CH3        0x00210330  //Bat Temp
+  16:../src/ADC_Module.c **** #define ADC0_CH4        0x00210430  //Vbat
+  17:../src/ADC_Module.c **** #define ADC0_CH5        0x00210530  //IMON
+  18:../src/ADC_Module.c **** #define ADC0_CH6        0x00210630  //VMON
+  19:../src/ADC_Module.c **** #define ADC0_CH7        0x00210730  //VREF
+  20:../src/ADC_Module.c **** #define ADC_DATA        ADC0->SINGLEDATA
+  21:../src/ADC_Module.c **** #define CAPTURE_ADC0()  ADC0->CMD = 0x01
+  22:../src/ADC_Module.c **** 
+  23:../src/ADC_Module.c **** /******************************************************************************
+  24:../src/ADC_Module.c ****  * Global Vars
+  25:../src/ADC_Module.c ****  */
+  26:../src/ADC_Module.c **** uint32_t Vref, Battery, Outv, Outi, OutiCalc, BatTemp;
+  27:../src/ADC_Module.c **** 
+  28:../src/ADC_Module.c **** /******************************************************************************
+  29:../src/ADC_Module.c ****  *              Function Prototypes
+  30:../src/ADC_Module.c **** */
+  31:../src/ADC_Module.c **** //Tasks
+  32:../src/ADC_Module.c **** void ADTask(void * pvParameters);
+  33:../src/ADC_Module.c **** //Functions
+  34:../src/ADC_Module.c **** static uint32_t SingleRead(uint32_t singlectrl);
+  35:../src/ADC_Module.c **** /****************** SingleRead()
+  36:../src/ADC_Module.c ****  * Description:     Reads a single AD line
+  37:../src/ADC_Module.c ****  * Params           singlectrl:     The init sent to ADC0->SINGLECTRL
+  38:../src/ADC_Module.c ****  * Return           The voltage value on the ADC line.
+  39:../src/ADC_Module.c ****  * Last Edited:     4/6/2015 RTC
+  40:../src/ADC_Module.c ****  */
+  41:../src/ADC_Module.c **** static uint32_t SingleRead(uint32_t singlectrl)
+  42:../src/ADC_Module.c **** {
+  37              		.loc 1 42 0
+  38              		.cfi_startproc
+  39              		@ args = 0, pretend = 0, frame = 8
+  40              		@ frame_needed = 1, uses_anonymous_args = 0
+  41 0000 80B5     		push	{r7, lr}
+  42              		.cfi_def_cfa_offset 8
+  43              		.cfi_offset 7, -8
+  44              		.cfi_offset 14, -4
+  45 0002 82B0     		sub	sp, sp, #8
+  46              		.cfi_def_cfa_offset 16
+  47 0004 00AF     		add	r7, sp, #0
+  48              		.cfi_def_cfa_register 7
+  49 0006 7860     		str	r0, [r7, #4]
+  43:../src/ADC_Module.c ****     ADC0->SINGLECTRL = singlectrl;
+  50              		.loc 1 43 0
+  51 0008 0E4A     		ldr	r2, .L4
+  52 000a 7B68     		ldr	r3, [r7, #4]
+  53 000c D360     		str	r3, [r2, #12]
+  44:../src/ADC_Module.c ****     CAPTURE_ADC0();
+  54              		.loc 1 44 0
+  55 000e 0D4B     		ldr	r3, .L4
+  56 0010 0122     		movs	r2, #1
+  57 0012 5A60     		str	r2, [r3, #4]
+  45:../src/ADC_Module.c ****     vTaskDelay(5);
+  58              		.loc 1 45 0
+  59 0014 0520     		movs	r0, #5
+  60 0016 FFF7FEFF 		bl	vTaskDelay
+  46:../src/ADC_Module.c ****     while (ADC_NOT_READY)
+  61              		.loc 1 46 0
+  62 001a 00BF     		nop
+  63              	.L2:
+  64              		.loc 1 46 0 is_stmt 0 discriminator 1
+  65 001c 094B     		ldr	r3, .L4
+  66 001e 9B68     		ldr	r3, [r3, #8]
+  67 0020 03F00103 		and	r3, r3, #1
+  68 0024 002B     		cmp	r3, #0
+  69 0026 F9D1     		bne	.L2
+  47:../src/ADC_Module.c ****     {/* Wait for ADC to capture data*/}
+  48:../src/ADC_Module.c ****     return (ADC_VOLTS);
+  70              		.loc 1 48 0 is_stmt 1
+  71 0028 064B     		ldr	r3, .L4
+  72 002a 5B6A     		ldr	r3, [r3, #36]
+  73 002c 40F6C412 		movw	r2, #2500
+  74 0030 02FB03F3 		mul	r3, r2, r3
+  75 0034 044A     		ldr	r2, .L4+4
+  76 0036 A2FB0323 		umull	r2, r3, r2, r3
+  77 003a DB0B     		lsrs	r3, r3, #15
+  49:../src/ADC_Module.c **** }
+  78              		.loc 1 49 0
+  79 003c 1846     		mov	r0, r3
+  80 003e 0837     		adds	r7, r7, #8
+  81              		.cfi_def_cfa_offset 8
+  82 0040 BD46     		mov	sp, r7
+  83              		.cfi_def_cfa_register 13
+  84              		@ sp needed
+  85 0042 80BD     		pop	{r7, pc}
+  86              	.L5:
+  87              		.align	2
+  88              	.L4:
+  89 0044 00200040 		.word	1073750016
+  90 0048 01800080 		.word	-2147450879
+  91              		.cfi_endproc
+  92              	.LFE61:
+  94              		.section	.text.ADTask,"ax",%progbits
+  95              		.align	2
+  96              		.global	ADTask
+  97              		.thumb
+  98              		.thumb_func
+ 100              	ADTask:
+ 101              	.LFB62:
+  50:../src/ADC_Module.c **** 
+  51:../src/ADC_Module.c **** /****************** ADTask()
+  52:../src/ADC_Module.c ****  * Description:     Initializes the AD converters, and saves their values for
+  53:../src/ADC_Module.c ****  *                  debugging.  Testing the safety switch (ADC0_CH5), Battery
+  54:../src/ADC_Module.c ****  *                  monitor (ADC0_CH7), OUTV_MON (ADC0_CH6), and
+  55:../src/ADC_Module.c ****  *                  OUTI_MON (ADC0_CH4)
+  56:../src/ADC_Module.c ****  * Params           none
+  57:../src/ADC_Module.c ****  * Return           none
+  58:../src/ADC_Module.c ****  * Last Edited:     4/6/2015 RTC
+  59:../src/ADC_Module.c ****  */
+  60:../src/ADC_Module.c **** void ADTask(void * pvParameters)
+  61:../src/ADC_Module.c **** {
+ 102              		.loc 1 61 0
+ 103              		.cfi_startproc
+ 104              		@ args = 0, pretend = 0, frame = 8
+ 105              		@ frame_needed = 1, uses_anonymous_args = 0
+ 106 0000 80B5     		push	{r7, lr}
+ 107              		.cfi_def_cfa_offset 8
+ 108              		.cfi_offset 7, -8
+ 109              		.cfi_offset 14, -4
+ 110 0002 82B0     		sub	sp, sp, #8
+ 111              		.cfi_def_cfa_offset 16
+ 112 0004 00AF     		add	r7, sp, #0
+ 113              		.cfi_def_cfa_register 7
+ 114 0006 7860     		str	r0, [r7, #4]
+  62:../src/ADC_Module.c ****     GPIO->P[4].MODEH |= 5<<4*(13-8);    //Enables the voltage reference
+ 115              		.loc 1 62 0
+ 116 0008 3D4A     		ldr	r2, .L8
+ 117 000a 3D4B     		ldr	r3, .L8
+ 118 000c D3F89830 		ldr	r3, [r3, #152]
+ 119 0010 43F4A003 		orr	r3, r3, #5242880
+ 120 0014 C2F89830 		str	r3, [r2, #152]
+  63:../src/ADC_Module.c ****     GPIO->P[4].DOUTSET = 1<<13;
+ 121              		.loc 1 63 0
+ 122 0018 394B     		ldr	r3, .L8
+ 123 001a 4FF40052 		mov	r2, #8192
+ 124 001e C3F8A020 		str	r2, [r3, #160]
+  64:../src/ADC_Module.c ****     GPIO->P[4].CTRL = 1;        //output set to "Lowest"
+ 125              		.loc 1 64 0
+ 126 0022 374B     		ldr	r3, .L8
+ 127 0024 0122     		movs	r2, #1
+ 128 0026 C3F89020 		str	r2, [r3, #144]
+  65:../src/ADC_Module.c ****     ADC0->CTRL = 0x030F0323; //g_pADC0->CTRL = 0x030F0323; //x16 oversampling, 16bits resolution
+ 129              		.loc 1 65 0
+ 130 002a 364B     		ldr	r3, .L8+4
+ 131 002c 364A     		ldr	r2, .L8+8
+ 132 002e 1A60     		str	r2, [r3]
+ 133              	.L7:
+  66:../src/ADC_Module.c ****     while (1)
+  67:../src/ADC_Module.c ****     {
+  68:../src/ADC_Module.c **** 
+  69:../src/ADC_Module.c ****         /***            IMON                ***/
+  70:../src/ADC_Module.c ****         Outi = SingleRead(ADC0_CH5);   //Convert to mV
+ 134              		.loc 1 70 0 discriminator 1
+ 135 0030 3648     		ldr	r0, .L8+12
+ 136 0032 FFF7FEFF 		bl	SingleRead
+ 137 0036 0246     		mov	r2, r0
+ 138 0038 354B     		ldr	r3, .L8+16
+ 139 003a 1A60     		str	r2, [r3]
+  71:../src/ADC_Module.c ****         OutiCalc *= 5;
+ 140              		.loc 1 71 0 discriminator 1
+ 141 003c 354B     		ldr	r3, .L8+20
+ 142 003e 1A68     		ldr	r2, [r3]
+ 143 0040 1346     		mov	r3, r2
+ 144 0042 9B00     		lsls	r3, r3, #2
+ 145 0044 1344     		add	r3, r3, r2
+ 146 0046 334A     		ldr	r2, .L8+20
+ 147 0048 1360     		str	r3, [r2]
+  72:../src/ADC_Module.c ****         OutiCalc /= 2;
+ 148              		.loc 1 72 0 discriminator 1
+ 149 004a 324B     		ldr	r3, .L8+20
+ 150 004c 1B68     		ldr	r3, [r3]
+ 151 004e 5B08     		lsrs	r3, r3, #1
+ 152 0050 304A     		ldr	r2, .L8+20
+ 153 0052 1360     		str	r3, [r2]
+  73:../src/ADC_Module.c ****         /***            OUTV_MON            ***/
+  74:../src/ADC_Module.c ****         Outv = SingleRead(ADC0_CH6);
+ 154              		.loc 1 74 0 discriminator 1
+ 155 0054 3048     		ldr	r0, .L8+24
+ 156 0056 FFF7FEFF 		bl	SingleRead
+ 157 005a 0246     		mov	r2, r0
+ 158 005c 2F4B     		ldr	r3, .L8+28
+ 159 005e 1A60     		str	r2, [r3]
+  75:../src/ADC_Module.c ****         Outv *= 14545;
+ 160              		.loc 1 75 0 discriminator 1
+ 161 0060 2E4B     		ldr	r3, .L8+28
+ 162 0062 1B68     		ldr	r3, [r3]
+ 163 0064 43F6D102 		movw	r2, #14545
+ 164 0068 02FB03F3 		mul	r3, r2, r3
+ 165 006c 2B4A     		ldr	r2, .L8+28
+ 166 006e 1360     		str	r3, [r2]
+  76:../src/ADC_Module.c ****         Outv /= 4545;
+ 167              		.loc 1 76 0 discriminator 1
+ 168 0070 2A4B     		ldr	r3, .L8+28
+ 169 0072 1B68     		ldr	r3, [r3]
+ 170 0074 2A4A     		ldr	r2, .L8+32
+ 171 0076 A2FB0323 		umull	r2, r3, r2, r3
+ 172 007a 1B0B     		lsrs	r3, r3, #12
+ 173 007c 274A     		ldr	r2, .L8+28
+ 174 007e 1360     		str	r3, [r2]
+  77:../src/ADC_Module.c ****         /***            Voltage Reference   ***/
+  78:../src/ADC_Module.c ****         Vref = SingleRead(ADC0_CH7);
+ 175              		.loc 1 78 0 discriminator 1
+ 176 0080 2848     		ldr	r0, .L8+36
+ 177 0082 FFF7FEFF 		bl	SingleRead
+ 178 0086 0246     		mov	r2, r0
+ 179 0088 274B     		ldr	r3, .L8+40
+ 180 008a 1A60     		str	r2, [r3]
+  79:../src/ADC_Module.c ****         /***            Vbat                ***/
+  80:../src/ADC_Module.c ****         Battery = SingleRead(ADC0_CH4);
+ 181              		.loc 1 80 0 discriminator 1
+ 182 008c 2748     		ldr	r0, .L8+44
+ 183 008e FFF7FEFF 		bl	SingleRead
+ 184 0092 0246     		mov	r2, r0
+ 185 0094 264B     		ldr	r3, .L8+48
+ 186 0096 1A60     		str	r2, [r3]
+  81:../src/ADC_Module.c ****         Battery = Battery*7/2;
+ 187              		.loc 1 81 0 discriminator 1
+ 188 0098 254B     		ldr	r3, .L8+48
+ 189 009a 1A68     		ldr	r2, [r3]
+ 190 009c 1346     		mov	r3, r2
+ 191 009e DB00     		lsls	r3, r3, #3
+ 192 00a0 9B1A     		subs	r3, r3, r2
+ 193 00a2 5B08     		lsrs	r3, r3, #1
+ 194 00a4 224A     		ldr	r2, .L8+48
+ 195 00a6 1360     		str	r3, [r2]
+  82:../src/ADC_Module.c ****         xTaskNotify(xDACTask, Battery, eSetValueWithOverwrite);
+ 196              		.loc 1 82 0 discriminator 1
+ 197 00a8 224B     		ldr	r3, .L8+52
+ 198 00aa 1A68     		ldr	r2, [r3]
+ 199 00ac 204B     		ldr	r3, .L8+48
+ 200 00ae 1B68     		ldr	r3, [r3]
+ 201 00b0 1046     		mov	r0, r2
+ 202 00b2 1946     		mov	r1, r3
+ 203 00b4 0322     		movs	r2, #3
+ 204 00b6 0023     		movs	r3, #0
+ 205 00b8 FFF7FEFF 		bl	xTaskGenericNotify
+  83:../src/ADC_Module.c ****         /***            Bat_Temp            ***/
+  84:../src/ADC_Module.c ****         BatTemp = (SingleRead(ADC0_CH3)*Vref/0xffff);
+ 206              		.loc 1 84 0 discriminator 1
+ 207 00bc 1E48     		ldr	r0, .L8+56
+ 208 00be FFF7FEFF 		bl	SingleRead
+ 209 00c2 0246     		mov	r2, r0
+ 210 00c4 184B     		ldr	r3, .L8+40
+ 211 00c6 1B68     		ldr	r3, [r3]
+ 212 00c8 03FB02F3 		mul	r3, r3, r2
+ 213 00cc 1B4A     		ldr	r2, .L8+60
+ 214 00ce A2FB0323 		umull	r2, r3, r2, r3
+ 215 00d2 DB0B     		lsrs	r3, r3, #15
+ 216 00d4 1A4A     		ldr	r2, .L8+64
+ 217 00d6 1360     		str	r3, [r2]
+  85:../src/ADC_Module.c ****         BatTemp = (BatTemp*(1+10)-Vref*1)/(Vref-BatTemp);
+ 218              		.loc 1 85 0 discriminator 1
+ 219 00d8 194B     		ldr	r3, .L8+64
+ 220 00da 1A68     		ldr	r2, [r3]
+ 221 00dc 1346     		mov	r3, r2
+ 222 00de 9B00     		lsls	r3, r3, #2
+ 223 00e0 1344     		add	r3, r3, r2
+ 224 00e2 5B00     		lsls	r3, r3, #1
+ 225 00e4 1A44     		add	r2, r2, r3
+ 226 00e6 104B     		ldr	r3, .L8+40
+ 227 00e8 1B68     		ldr	r3, [r3]
+ 228 00ea D21A     		subs	r2, r2, r3
+ 229 00ec 0E4B     		ldr	r3, .L8+40
+ 230 00ee 1968     		ldr	r1, [r3]
+ 231 00f0 134B     		ldr	r3, .L8+64
+ 232 00f2 1B68     		ldr	r3, [r3]
+ 233 00f4 CB1A     		subs	r3, r1, r3
+ 234 00f6 B2FBF3F3 		udiv	r3, r2, r3
+ 235 00fa 114A     		ldr	r2, .L8+64
+ 236 00fc 1360     		str	r3, [r2]
+  86:../src/ADC_Module.c ****     }
+ 237              		.loc 1 86 0 discriminator 1
+ 238 00fe 97E7     		b	.L7
+ 239              	.L9:
+ 240              		.align	2
+ 241              	.L8:
+ 242 0100 00600040 		.word	1073766400
+ 243 0104 00200040 		.word	1073750016
+ 244 0108 23030F03 		.word	51315491
+ 245 010c 30052100 		.word	2164016
+ 246 0110 00000000 		.word	Outi
+ 247 0114 00000000 		.word	OutiCalc
+ 248 0118 30062100 		.word	2164272
+ 249 011c 00000000 		.word	Outv
+ 250 0120 DDB4B5E6 		.word	-424299299
+ 251 0124 30072100 		.word	2164528
+ 252 0128 00000000 		.word	Vref
+ 253 012c 30042100 		.word	2163760
+ 254 0130 00000000 		.word	Battery
+ 255 0134 00000000 		.word	xDACTask
+ 256 0138 30032100 		.word	2163504
+ 257 013c 01800080 		.word	-2147450879
+ 258 0140 00000000 		.word	BatTemp
+ 259              		.cfi_endproc
+ 260              	.LFE62:
+ 262              		.text
+ 263              	.Letext0:
+ 264              		.file 2 "c:\\program files (x86)\\emprog\\thunderbench-arm-v3.85\\arm\\arm-none-eabi\\include\\mac
+ 265              		.file 3 "c:\\program files (x86)\\emprog\\thunderbench-arm-v3.85\\arm\\arm-none-eabi\\include\\std
+ 266              		.file 4 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\Device\\EnergyMicro\\EFM32\\Include/efm32lg_
+ 267              		.file 5 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\Device\\EnergyMicro\\EFM32\\Include/efm32lg_
+ 268              		.file 6 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\Device\\EnergyMicro\\EFM32\\Include/efm32lg_
+ 269              		.file 7 "U:/Thunderspace/EFM32LG330F128/RTOSincludes/queue.h"
+ 270              		.file 8 "U:/Thunderspace/EFM32LG330F128/RTOSincludes/semphr.h"
+ 271              		.file 9 "U:/Thunderspace/EFM32LG330F128/RTOSincludes/task.h"
+ 272              		.file 10 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\CMSIS\\Include/core_cm3.h"
+ 273              		.file 11 "../src/../Libraries/includes.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADC_Module.c
+                            *COM*:00000004 PuffSem
+                            *COM*:00000004 LEDSem
+                            *COM*:00000004 LEDRedMut
+                            *COM*:00000004 LEDGreenMut
+                            *COM*:00000004 LEDBlueMut
+                            *COM*:00000004 Vref
+                            *COM*:00000004 Battery
+                            *COM*:00000004 Outv
+                            *COM*:00000004 Outi
+                            *COM*:00000004 OutiCalc
+                            *COM*:00000004 BatTemp
+C:\Users\Riley\AppData\Local\Temp\ccNBBpkQ.s:30     .text.SingleRead:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccNBBpkQ.s:34     .text.SingleRead:00000000 SingleRead
+C:\Users\Riley\AppData\Local\Temp\ccNBBpkQ.s:89     .text.SingleRead:00000044 $d
+C:\Users\Riley\AppData\Local\Temp\ccNBBpkQ.s:95     .text.ADTask:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccNBBpkQ.s:100    .text.ADTask:00000000 ADTask
+C:\Users\Riley\AppData\Local\Temp\ccNBBpkQ.s:242    .text.ADTask:00000100 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+vTaskDelay
+xTaskGenericNotify
+xDACTask

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.debug.2112116847">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.debug.2112116847" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ProjName}" buildArtefactType="com.thundervalley.thunderarm.cdt.buildArtefactType.application" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.thundervalley.thunderarm.cdt.buildArtefactType.application,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" description="" id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.debug.2112116847" name="Debug" parent="com.thundervalley.thunderarm.cdt.thunder.windows.elf.debug">
+					<folderInfo id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.debug.2112116847." name="/" resourcePath="">
+						<toolChain id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.toolchain.debug.1591633562" name="Thunder ARM Tools Windows" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.toolchain.debug">
+							<option id="com.thundervalley.thunderarm.cdt.thunder.windows.option.debugging.level.1060010475" name="Debug level" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.option.debugging.level"/>
+							<option id="com.thundervalley.thunderarm.cdt.thunder.windows.option.target.processor.437771024" name="Core Processor :" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.option.target.processor" value="cortex-m3" valueType="enumerated"/>
+							<option id="com.thundervalley.thunderarm.cdt.thunder.windows.option.debugging.initscript.1874395161" name="Init script (.gdb)" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.option.debugging.initscript"/>
+							<targetPlatform id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.platform.debug.1622473408" isAbstract="false" name="Windows Platform" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.platform.debug"/>
+							<builder buildPath="${workspace_loc:/ThunderBench130126}/Debug" id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.builder.debug.166974248" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="ThunderBench ARM Windows GNU Make builder" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.builder.debug">
+								<outputEntries>
+									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Debug"/>
+									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Release"/>
+								</outputEntries>
+							</builder>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.assembler.debug.802246227" name="ThunderBench ARM Assembler" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.assembler.debug">
+								<option id="com.thundervalley.thunderarm.cdt.assembler.option.preprocessor.def.2015180781" name="Defined symbols (-D)" superClass="com.thundervalley.thunderarm.cdt.assembler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="__GNUC__=4"/>
+								</option>
+								<option id="com.thundervalley.thunderarm.cdt.assembler.option.include.paths.773061223" name="Include paths (-I)" superClass="com.thundervalley.thunderarm.cdt.assembler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/RTOSincludes&quot;"/>
+								</option>
+								<inputType id="com.thundervalley.thunderarm.cdt.thunder.windows.assembler.base.input.2067964148" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.assembler.base.input"/>
+							</tool>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.c.compiler.debug.479209998" name="ThunderBench ARM C Compiler" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.c.compiler.debug">
+								<option id="com.thundervalley.thunderarm.cdt.c.compiler.option.optimization.level.1182424464" name="Optimization level" superClass="com.thundervalley.thunderarm.cdt.c.compiler.option.optimization.level"/>
+								<option id="com.thundervalley.thunderarm.cdt.c.compiler.option.include.paths.1799557765" name="Include paths (-I)" superClass="com.thundervalley.thunderarm.cdt.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/Device/EnergyMicro/EFM32/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/RTOSincludes&quot;"/>
+								</option>
+								<option id="com.thundervalley.thunderarm.cdt.c.compiler.option.preprocessor.def.508799458" name="Defined symbols (-D)" superClass="com.thundervalley.thunderarm.cdt.c.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="EFM32LG330F128"/>
+									<listOptionValue builtIn="false" value="__GNUC__=4"/>
+								</option>
+								<inputType id="com.thundervalley.thunderarm.cdt.thunder.windows.c.compiler.base.input.1666126207" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.c.compiler.base.input"/>
+							</tool>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.cpp.compiler.debug.1816660076" name="ThunderBench ARM C++ Compiler" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.cpp.compiler.debug">
+								<option id="com.thundervalley.thunderarm.cdt.cpp.compiler.option.optimization.level.1117920816" name="Optimization level" superClass="com.thundervalley.thunderarm.cdt.cpp.compiler.option.optimization.level"/>
+							</tool>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.c.linker.debug.417728335" name="ThunderBench ARM C Linker" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.c.linker.debug">
+								<option id="com.thundervalley.thunderarm.cdt.c.link.option.scriptfile.1575217943" name="Script file (-T)" superClass="com.thundervalley.thunderarm.cdt.c.link.option.scriptfile" valueType="includeFiles">
+									<listOptionValue builtIn="false" value="${workspace_loc:/${ProjName}/EFM32LG330F128_flash.ld}"/>
+								</option>
+								<inputType id="com.thundervalley.thunderarm.cdt.c.linker.input.602713391" superClass="com.thundervalley.thunderarm.cdt.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.cpp.linker.debug.934985564" name="ThunderBench ARM C++ Linker" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.cpp.linker.debug"/>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.archiver.base.1555781915" name="ThunderBench ARM Archiver" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.archiver.base"/>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.createflash.debug.2028751034" name="Project Flash Binary Output (.bin)" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.createflash.debug"/>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.createlisting.debug.673852494" name="Project Listing Output" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.createlisting.debug"/>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.printsize.debug.348042718" name="Project Output Size Format" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.printsize.debug"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.release.339915830">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.release.339915830" moduleId="org.eclipse.cdt.core.settings" name="Release">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ProjName}" buildArtefactType="com.thundervalley.thunderarm.cdt.buildArtefactType.application" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.thundervalley.thunderarm.cdt.buildArtefactType.application,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" description="" id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.release.339915830" name="Release" parent="com.thundervalley.thunderarm.cdt.thunder.windows.elf.release">
+					<folderInfo id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.release.339915830." name="/" resourcePath="">
+						<toolChain id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.toolchain.release.1770359333" name="Thunder ARM Tools Windows" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.toolchain.release">
+							<option id="com.thundervalley.thunderarm.cdt.thunder.windows.option.debugging.level.442365196" name="Debug level" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.option.debugging.level" value="com.thundervalley.thunderarm.cdt.base.option.debugging.level.none" valueType="enumerated"/>
+							<option id="com.thundervalley.thunderarm.cdt.thunder.windows.option.target.processor.1707078762" name="Core Processor :" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.option.target.processor" value="cortex-m3" valueType="enumerated"/>
+							<targetPlatform id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.platform.release.1263849135" isAbstract="false" name="Windows Platform" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.platform.release"/>
+							<builder buildPath="${workspace_loc:/ThunderBench130126}/Release" id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.builder.release.80715946" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="ThunderBench ARM Windows GNU Make builder" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.builder.release"/>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.assembler.release.1428527438" name="ThunderBench ARM Assembler" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.assembler.release">
+								<option id="com.thundervalley.thunderarm.cdt.assembler.option.preprocessor.def.1567742210" name="Defined symbols (-D)" superClass="com.thundervalley.thunderarm.cdt.assembler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="__GNUC__=4"/>
+								</option>
+								<option id="com.thundervalley.thunderarm.cdt.assembler.option.include.paths.859312575" name="Include paths (-I)" superClass="com.thundervalley.thunderarm.cdt.assembler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/RTOSincludes&quot;"/>
+								</option>
+								<inputType id="com.thundervalley.thunderarm.cdt.thunder.windows.assembler.base.input.1610209995" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.assembler.base.input"/>
+							</tool>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.c.compiler.release.1066379526" name="ThunderBench ARM C Compiler" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.c.compiler.release">
+								<option id="com.thundervalley.thunderarm.cdt.c.compiler.option.optimization.level.20518973" name="Optimization level" superClass="com.thundervalley.thunderarm.cdt.c.compiler.option.optimization.level" value="com.thundervalley.thunderarm.cdt.base.option.optimization.level.size" valueType="enumerated"/>
+								<option id="com.thundervalley.thunderarm.cdt.c.compiler.option.preprocessor.def.1546638351" name="Defined symbols (-D)" superClass="com.thundervalley.thunderarm.cdt.c.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="__GNUC__=4"/>
+								</option>
+								<option id="com.thundervalley.thunderarm.cdt.c.compiler.option.include.paths.2067455237" name="Include paths (-I)" superClass="com.thundervalley.thunderarm.cdt.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/RTOSincludes&quot;"/>
+								</option>
+								<inputType id="com.thundervalley.thunderarm.cdt.thunder.windows.c.compiler.base.input.1051481272" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.c.compiler.base.input"/>
+							</tool>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.cpp.compiler.release.949626489" name="ThunderBench ARM C++ Compiler" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.cpp.compiler.release">
+								<option id="com.thundervalley.thunderarm.cdt.cpp.compiler.option.optimization.level.1619841379" name="Optimization level" superClass="com.thundervalley.thunderarm.cdt.cpp.compiler.option.optimization.level" value="com.thundervalley.thunderarm.cdt.base.option.optimization.level.size" valueType="enumerated"/>
+							</tool>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.c.linker.release.561390207" name="ThunderBench ARM C Linker" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.c.linker.release">
+								<option id="com.thundervalley.thunderarm.cdt.c.link.option.scriptfile.1426459587" name="Script file (-T)" superClass="com.thundervalley.thunderarm.cdt.c.link.option.scriptfile" valueType="includeFiles">
+									<listOptionValue builtIn="false" value="${workspace_loc:/${ProjName}/EFM32G200F16_flash.ld}"/>
+								</option>
+								<inputType id="com.thundervalley.thunderarm.cdt.c.linker.input.1229356765" superClass="com.thundervalley.thunderarm.cdt.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.cpp.linker.release.1198154940" name="ThunderBench ARM C++ Linker" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.cpp.linker.release"/>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.archiver.base.345074369" name="ThunderBench ARM Archiver" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.archiver.base"/>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.createflash.release.1760296714" name="Project Flash Binary Output (.bin)" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.createflash.release"/>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.createlisting.release.1548939867" name="Project Listing Output" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.createlisting.release"/>
+							<tool id="com.thundervalley.thunderarm.cdt.thunder.windows.elf.printsize.release.1906022261" name="Project Output Size Format" superClass="com.thundervalley.thunderarm.cdt.thunder.windows.elf.printsize.release"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="ThunderBench130126.com.thundervalley.thunderarm.cdt.thunderarmtool.windows.elf.640836764" name="ARM Thunder Target Application" projectType="com.thundervalley.thunderarm.cdt.thunderarmtool.windows.elf"/>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.thundervalley.thunderarm.cdt.thunder.windows.elf.release.339915830;com.thundervalley.thunderarm.cdt.thunder.windows.elf.release.339915830.;com.thundervalley.thunderarm.cdt.thunder.windows.elf.c.compiler.release.1066379526;com.thundervalley.thunderarm.cdt.thunder.windows.c.compiler.base.input.1051481272">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.thundervalley.thunderarm.cdt.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.thundervalley.thunderarm.cdt.thunder.windows.elf.release.339915830;com.thundervalley.thunderarm.cdt.thunder.windows.elf.release.339915830.;com.thundervalley.thunderarm.cdt.thunder.windows.elf.assembler.release.1428527438;com.thundervalley.thunderarm.cdt.thunder.windows.assembler.base.input.1610209995">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.thundervalley.thunderarm.cdt.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.thundervalley.thunderarm.cdt.thunder.windows.elf.debug.2112116847;com.thundervalley.thunderarm.cdt.thunder.windows.elf.debug.2112116847.;com.thundervalley.thunderarm.cdt.thunder.windows.elf.c.compiler.debug.479209998;com.thundervalley.thunderarm.cdt.thunder.windows.c.compiler.base.input.1666126207">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.thundervalley.thunderarm.cdt.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.thundervalley.thunderarm.cdt.thunder.windows.elf.debug.2112116847;com.thundervalley.thunderarm.cdt.thunder.windows.elf.debug.2112116847.;com.thundervalley.thunderarm.cdt.thunder.windows.elf.assembler.debug.802246227;com.thundervalley.thunderarm.cdt.thunder.windows.assembler.base.input.2067964148">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.thundervalley.thunderarm.cdt.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/EFM32LG330F128"/>
+		</configuration>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/EFM32LG330F128"/>
+		</configuration>
+	</storageModule>
+</cproject>

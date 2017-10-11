@@ -1,0 +1,462 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"heap_1.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.bss.ucHeap,"aw",%nobits
+  19              		.align	2
+  22              	ucHeap:
+  23 0000 00000000 		.space	16384
+  23      00000000 
+  23      00000000 
+  23      00000000 
+  23      00000000 
+  24              		.section	.bss.xNextFreeByte,"aw",%nobits
+  25              		.align	2
+  28              	xNextFreeByte:
+  29 0000 00000000 		.space	4
+  30              		.section	.text.pvPortMalloc,"ax",%progbits
+  31              		.align	2
+  32              		.global	pvPortMalloc
+  33              		.thumb
+  34              		.thumb_func
+  36              	pvPortMalloc:
+  37              	.LFB4:
+  38              		.file 1 "../src/RTOS/heap_1.c"
+   1:../src/RTOS/heap_1.c **** /*
+   2:../src/RTOS/heap_1.c ****     FreeRTOS V9.0.0rc2 - Copyright (C) 2016 Real Time Engineers Ltd.
+   3:../src/RTOS/heap_1.c ****     All rights reserved
+   4:../src/RTOS/heap_1.c **** 
+   5:../src/RTOS/heap_1.c ****     VISIT http://www.FreeRTOS.org TO ENSURE YOU ARE USING THE LATEST VERSION.
+   6:../src/RTOS/heap_1.c **** 
+   7:../src/RTOS/heap_1.c ****     This file is part of the FreeRTOS distribution.
+   8:../src/RTOS/heap_1.c **** 
+   9:../src/RTOS/heap_1.c ****     FreeRTOS is free software; you can redistribute it and/or modify it under
+  10:../src/RTOS/heap_1.c ****     the terms of the GNU General Public License (version 2) as published by the
+  11:../src/RTOS/heap_1.c ****     Free Software Foundation >>>> AND MODIFIED BY <<<< the FreeRTOS exception.
+  12:../src/RTOS/heap_1.c **** 
+  13:../src/RTOS/heap_1.c ****     ***************************************************************************
+  14:../src/RTOS/heap_1.c ****     >>!   NOTE: The modification to the GPL is included to allow you to     !<<
+  15:../src/RTOS/heap_1.c ****     >>!   distribute a combined work that includes FreeRTOS without being   !<<
+  16:../src/RTOS/heap_1.c ****     >>!   obliged to provide the source code for proprietary components     !<<
+  17:../src/RTOS/heap_1.c ****     >>!   outside of the FreeRTOS kernel.                                   !<<
+  18:../src/RTOS/heap_1.c ****     ***************************************************************************
+  19:../src/RTOS/heap_1.c **** 
+  20:../src/RTOS/heap_1.c ****     FreeRTOS is distributed in the hope that it will be useful, but WITHOUT ANY
+  21:../src/RTOS/heap_1.c ****     WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+  22:../src/RTOS/heap_1.c ****     FOR A PARTICULAR PURPOSE.  Full license text is available on the following
+  23:../src/RTOS/heap_1.c ****     link: http://www.freertos.org/a00114.html
+  24:../src/RTOS/heap_1.c **** 
+  25:../src/RTOS/heap_1.c ****     ***************************************************************************
+  26:../src/RTOS/heap_1.c ****      *                                                                       *
+  27:../src/RTOS/heap_1.c ****      *    FreeRTOS provides completely free yet professionally developed,    *
+  28:../src/RTOS/heap_1.c ****      *    robust, strictly quality controlled, supported, and cross          *
+  29:../src/RTOS/heap_1.c ****      *    platform software that is more than just the market leader, it     *
+  30:../src/RTOS/heap_1.c ****      *    is the industry's de facto standard.                               *
+  31:../src/RTOS/heap_1.c ****      *                                                                       *
+  32:../src/RTOS/heap_1.c ****      *    Help yourself get started quickly while simultaneously helping     *
+  33:../src/RTOS/heap_1.c ****      *    to support the FreeRTOS project by purchasing a FreeRTOS           *
+  34:../src/RTOS/heap_1.c ****      *    tutorial book, reference manual, or both:                          *
+  35:../src/RTOS/heap_1.c ****      *    http://www.FreeRTOS.org/Documentation                              *
+  36:../src/RTOS/heap_1.c ****      *                                                                       *
+  37:../src/RTOS/heap_1.c ****     ***************************************************************************
+  38:../src/RTOS/heap_1.c **** 
+  39:../src/RTOS/heap_1.c ****     http://www.FreeRTOS.org/FAQHelp.html - Having a problem?  Start by reading
+  40:../src/RTOS/heap_1.c ****     the FAQ page "My application does not run, what could be wrong?".  Have you
+  41:../src/RTOS/heap_1.c ****     defined configASSERT()?
+  42:../src/RTOS/heap_1.c **** 
+  43:../src/RTOS/heap_1.c ****     http://www.FreeRTOS.org/support - In return for receiving this top quality
+  44:../src/RTOS/heap_1.c ****     embedded software for free we request you assist our global community by
+  45:../src/RTOS/heap_1.c ****     participating in the support forum.
+  46:../src/RTOS/heap_1.c **** 
+  47:../src/RTOS/heap_1.c ****     http://www.FreeRTOS.org/training - Investing in training allows your team to
+  48:../src/RTOS/heap_1.c ****     be as productive as possible as early as possible.  Now you can receive
+  49:../src/RTOS/heap_1.c ****     FreeRTOS training directly from Richard Barry, CEO of Real Time Engineers
+  50:../src/RTOS/heap_1.c ****     Ltd, and the world's leading authority on the world's leading RTOS.
+  51:../src/RTOS/heap_1.c **** 
+  52:../src/RTOS/heap_1.c ****     http://www.FreeRTOS.org/plus - A selection of FreeRTOS ecosystem products,
+  53:../src/RTOS/heap_1.c ****     including FreeRTOS+Trace - an indispensable productivity tool, a DOS
+  54:../src/RTOS/heap_1.c ****     compatible FAT file system, and our tiny thread aware UDP/IP stack.
+  55:../src/RTOS/heap_1.c **** 
+  56:../src/RTOS/heap_1.c ****     http://www.FreeRTOS.org/labs - Where new FreeRTOS products go to incubate.
+  57:../src/RTOS/heap_1.c ****     Come and try FreeRTOS+TCP, our new open source TCP/IP stack for FreeRTOS.
+  58:../src/RTOS/heap_1.c **** 
+  59:../src/RTOS/heap_1.c ****     http://www.OpenRTOS.com - Real Time Engineers ltd. license FreeRTOS to High
+  60:../src/RTOS/heap_1.c ****     Integrity Systems ltd. to sell under the OpenRTOS brand.  Low cost OpenRTOS
+  61:../src/RTOS/heap_1.c ****     licenses offer ticketed support, indemnification and commercial middleware.
+  62:../src/RTOS/heap_1.c **** 
+  63:../src/RTOS/heap_1.c ****     http://www.SafeRTOS.com - High Integrity Systems also provide a safety
+  64:../src/RTOS/heap_1.c ****     engineered and independently SIL3 certified version for use in safety and
+  65:../src/RTOS/heap_1.c ****     mission critical applications that require provable dependability.
+  66:../src/RTOS/heap_1.c **** 
+  67:../src/RTOS/heap_1.c ****     1 tab == 4 spaces!
+  68:../src/RTOS/heap_1.c **** */
+  69:../src/RTOS/heap_1.c **** 
+  70:../src/RTOS/heap_1.c **** 
+  71:../src/RTOS/heap_1.c **** /*
+  72:../src/RTOS/heap_1.c ****  * The simplest possible implementation of pvPortMalloc().  Note that this
+  73:../src/RTOS/heap_1.c ****  * implementation does NOT allow allocated memory to be freed again.
+  74:../src/RTOS/heap_1.c ****  *
+  75:../src/RTOS/heap_1.c ****  * See heap_2.c, heap_3.c and heap_4.c for alternative implementations, and the
+  76:../src/RTOS/heap_1.c ****  * memory management pages of http://www.FreeRTOS.org for more information.
+  77:../src/RTOS/heap_1.c ****  */
+  78:../src/RTOS/heap_1.c **** #include <stdlib.h>
+  79:../src/RTOS/heap_1.c **** 
+  80:../src/RTOS/heap_1.c **** /* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
+  81:../src/RTOS/heap_1.c **** all the API functions to use the MPU wrappers.  That should only be done when
+  82:../src/RTOS/heap_1.c **** task.h is included from an application file. */
+  83:../src/RTOS/heap_1.c **** #define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
+  84:../src/RTOS/heap_1.c **** 
+  85:../src/RTOS/heap_1.c **** #include "FreeRTOS.h"
+  86:../src/RTOS/heap_1.c **** #include "task.h"
+  87:../src/RTOS/heap_1.c **** 
+  88:../src/RTOS/heap_1.c **** #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
+  89:../src/RTOS/heap_1.c **** 
+  90:../src/RTOS/heap_1.c **** #if( configSUPPORT_DYNAMIC_ALLOCATION == 0 )
+  91:../src/RTOS/heap_1.c **** 	#error This file must not be used if configSUPPORT_DYNAMIC_ALLOCATION is 0
+  92:../src/RTOS/heap_1.c **** #endif
+  93:../src/RTOS/heap_1.c **** 
+  94:../src/RTOS/heap_1.c **** /* A few bytes might be lost to byte aligning the heap start address. */
+  95:../src/RTOS/heap_1.c **** #define configADJUSTED_HEAP_SIZE	( configTOTAL_HEAP_SIZE - portBYTE_ALIGNMENT )
+  96:../src/RTOS/heap_1.c **** 
+  97:../src/RTOS/heap_1.c **** /* Allocate the memory for the heap. */
+  98:../src/RTOS/heap_1.c **** /* Allocate the memory for the heap. */
+  99:../src/RTOS/heap_1.c **** #if( configAPPLICATION_ALLOCATED_HEAP == 1 )
+ 100:../src/RTOS/heap_1.c **** 	/* The application writer has already defined the array used for the RTOS
+ 101:../src/RTOS/heap_1.c **** 	heap - probably so it can be placed in a special segment or address. */
+ 102:../src/RTOS/heap_1.c **** 	extern uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+ 103:../src/RTOS/heap_1.c **** #else
+ 104:../src/RTOS/heap_1.c **** 	static uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+ 105:../src/RTOS/heap_1.c **** #endif /* configAPPLICATION_ALLOCATED_HEAP */
+ 106:../src/RTOS/heap_1.c **** 
+ 107:../src/RTOS/heap_1.c **** static size_t xNextFreeByte = ( size_t ) 0;
+ 108:../src/RTOS/heap_1.c **** 
+ 109:../src/RTOS/heap_1.c **** /*-----------------------------------------------------------*/
+ 110:../src/RTOS/heap_1.c **** 
+ 111:../src/RTOS/heap_1.c **** void *pvPortMalloc( size_t xWantedSize )
+ 112:../src/RTOS/heap_1.c **** {
+  39              		.loc 1 112 0
+  40              		.cfi_startproc
+  41              		@ args = 0, pretend = 0, frame = 16
+  42              		@ frame_needed = 1, uses_anonymous_args = 0
+  43 0000 80B5     		push	{r7, lr}
+  44              		.cfi_def_cfa_offset 8
+  45              		.cfi_offset 7, -8
+  46              		.cfi_offset 14, -4
+  47 0002 84B0     		sub	sp, sp, #16
+  48              		.cfi_def_cfa_offset 24
+  49 0004 00AF     		add	r7, sp, #0
+  50              		.cfi_def_cfa_register 7
+  51 0006 7860     		str	r0, [r7, #4]
+ 113:../src/RTOS/heap_1.c **** void *pvReturn = NULL;
+  52              		.loc 1 113 0
+  53 0008 0023     		movs	r3, #0
+  54 000a FB60     		str	r3, [r7, #12]
+ 114:../src/RTOS/heap_1.c **** static uint8_t *pucAlignedHeap = NULL;
+ 115:../src/RTOS/heap_1.c **** 
+ 116:../src/RTOS/heap_1.c **** 	/* Ensure that blocks are always aligned to the required number of bytes. */
+ 117:../src/RTOS/heap_1.c **** 	#if( portBYTE_ALIGNMENT != 1 )
+ 118:../src/RTOS/heap_1.c **** 	{
+ 119:../src/RTOS/heap_1.c **** 		if( xWantedSize & portBYTE_ALIGNMENT_MASK )
+  55              		.loc 1 119 0
+  56 000c 7B68     		ldr	r3, [r7, #4]
+  57 000e 03F00703 		and	r3, r3, #7
+  58 0012 002B     		cmp	r3, #0
+  59 0014 04D0     		beq	.L2
+ 120:../src/RTOS/heap_1.c **** 		{
+ 121:../src/RTOS/heap_1.c **** 			/* Byte alignment required. */
+ 122:../src/RTOS/heap_1.c **** 			xWantedSize += ( portBYTE_ALIGNMENT - ( xWantedSize & portBYTE_ALIGNMENT_MASK ) );
+  60              		.loc 1 122 0
+  61 0016 7B68     		ldr	r3, [r7, #4]
+  62 0018 23F00703 		bic	r3, r3, #7
+  63 001c 0833     		adds	r3, r3, #8
+  64 001e 7B60     		str	r3, [r7, #4]
+  65              	.L2:
+ 123:../src/RTOS/heap_1.c **** 		}
+ 124:../src/RTOS/heap_1.c **** 	}
+ 125:../src/RTOS/heap_1.c **** 	#endif
+ 126:../src/RTOS/heap_1.c **** 
+ 127:../src/RTOS/heap_1.c **** 	vTaskSuspendAll();
+  66              		.loc 1 127 0
+  67 0020 FFF7FEFF 		bl	vTaskSuspendAll
+ 128:../src/RTOS/heap_1.c **** 	{
+ 129:../src/RTOS/heap_1.c **** 		if( pucAlignedHeap == NULL )
+  68              		.loc 1 129 0
+  69 0024 164B     		ldr	r3, .L6
+  70 0026 1B68     		ldr	r3, [r3]
+  71 0028 002B     		cmp	r3, #0
+  72 002a 05D1     		bne	.L3
+ 130:../src/RTOS/heap_1.c **** 		{
+ 131:../src/RTOS/heap_1.c **** 			/* Ensure the heap starts on a correctly aligned boundary. */
+ 132:../src/RTOS/heap_1.c **** 			pucAlignedHeap = ( uint8_t * ) ( ( ( portPOINTER_SIZE_TYPE ) &ucHeap[ portBYTE_ALIGNMENT ] ) & (
+  73              		.loc 1 132 0
+  74 002c 154B     		ldr	r3, .L6+4
+  75 002e 23F00703 		bic	r3, r3, #7
+  76 0032 1A46     		mov	r2, r3
+  77 0034 124B     		ldr	r3, .L6
+  78 0036 1A60     		str	r2, [r3]
+  79              	.L3:
+ 133:../src/RTOS/heap_1.c **** 		}
+ 134:../src/RTOS/heap_1.c **** 
+ 135:../src/RTOS/heap_1.c **** 		/* Check there is enough room left for the allocation. */
+ 136:../src/RTOS/heap_1.c **** 		if( ( ( xNextFreeByte + xWantedSize ) < configADJUSTED_HEAP_SIZE ) &&
+  80              		.loc 1 136 0
+  81 0038 134B     		ldr	r3, .L6+8
+  82 003a 1A68     		ldr	r2, [r3]
+  83 003c 7B68     		ldr	r3, [r7, #4]
+  84 003e 1344     		add	r3, r3, r2
+  85 0040 43F6F772 		movw	r2, #16375
+  86 0044 9342     		cmp	r3, r2
+  87 0046 13D8     		bhi	.L4
+ 137:../src/RTOS/heap_1.c **** 			( ( xNextFreeByte + xWantedSize ) > xNextFreeByte )	)/* Check for overflow. */
+  88              		.loc 1 137 0 discriminator 1
+  89 0048 0F4B     		ldr	r3, .L6+8
+  90 004a 1A68     		ldr	r2, [r3]
+  91 004c 7B68     		ldr	r3, [r7, #4]
+  92 004e 1A44     		add	r2, r2, r3
+  93 0050 0D4B     		ldr	r3, .L6+8
+  94 0052 1B68     		ldr	r3, [r3]
+ 136:../src/RTOS/heap_1.c **** 			( ( xNextFreeByte + xWantedSize ) > xNextFreeByte )	)/* Check for overflow. */
+  95              		.loc 1 136 0 discriminator 1
+  96 0054 9A42     		cmp	r2, r3
+  97 0056 0BD9     		bls	.L4
+ 138:../src/RTOS/heap_1.c **** 		{
+ 139:../src/RTOS/heap_1.c **** 			/* Return the next free byte then increment the index past this
+ 140:../src/RTOS/heap_1.c **** 			block. */
+ 141:../src/RTOS/heap_1.c **** 			pvReturn = pucAlignedHeap + xNextFreeByte;
+  98              		.loc 1 141 0
+  99 0058 094B     		ldr	r3, .L6
+ 100 005a 1A68     		ldr	r2, [r3]
+ 101 005c 0A4B     		ldr	r3, .L6+8
+ 102 005e 1B68     		ldr	r3, [r3]
+ 103 0060 1344     		add	r3, r3, r2
+ 104 0062 FB60     		str	r3, [r7, #12]
+ 142:../src/RTOS/heap_1.c **** 			xNextFreeByte += xWantedSize;
+ 105              		.loc 1 142 0
+ 106 0064 084B     		ldr	r3, .L6+8
+ 107 0066 1A68     		ldr	r2, [r3]
+ 108 0068 7B68     		ldr	r3, [r7, #4]
+ 109 006a 1344     		add	r3, r3, r2
+ 110 006c 064A     		ldr	r2, .L6+8
+ 111 006e 1360     		str	r3, [r2]
+ 112              	.L4:
+ 143:../src/RTOS/heap_1.c **** 		}
+ 144:../src/RTOS/heap_1.c **** 
+ 145:../src/RTOS/heap_1.c **** 		traceMALLOC( pvReturn, xWantedSize );
+ 146:../src/RTOS/heap_1.c **** 	}
+ 147:../src/RTOS/heap_1.c **** 	( void ) xTaskResumeAll();
+ 113              		.loc 1 147 0
+ 114 0070 FFF7FEFF 		bl	xTaskResumeAll
+ 148:../src/RTOS/heap_1.c **** 
+ 149:../src/RTOS/heap_1.c **** 	#if( configUSE_MALLOC_FAILED_HOOK == 1 )
+ 150:../src/RTOS/heap_1.c **** 	{
+ 151:../src/RTOS/heap_1.c **** 		if( pvReturn == NULL )
+ 152:../src/RTOS/heap_1.c **** 		{
+ 153:../src/RTOS/heap_1.c **** 			extern void vApplicationMallocFailedHook( void );
+ 154:../src/RTOS/heap_1.c **** 			vApplicationMallocFailedHook();
+ 155:../src/RTOS/heap_1.c **** 		}
+ 156:../src/RTOS/heap_1.c **** 	}
+ 157:../src/RTOS/heap_1.c **** 	#endif
+ 158:../src/RTOS/heap_1.c **** 
+ 159:../src/RTOS/heap_1.c **** 	return pvReturn;
+ 115              		.loc 1 159 0
+ 116 0074 FB68     		ldr	r3, [r7, #12]
+ 160:../src/RTOS/heap_1.c **** }
+ 117              		.loc 1 160 0
+ 118 0076 1846     		mov	r0, r3
+ 119 0078 1037     		adds	r7, r7, #16
+ 120              		.cfi_def_cfa_offset 8
+ 121 007a BD46     		mov	sp, r7
+ 122              		.cfi_def_cfa_register 13
+ 123              		@ sp needed
+ 124 007c 80BD     		pop	{r7, pc}
+ 125              	.L7:
+ 126 007e 00BF     		.align	2
+ 127              	.L6:
+ 128 0080 00000000 		.word	pucAlignedHeap.5029
+ 129 0084 08000000 		.word	ucHeap+8
+ 130 0088 00000000 		.word	xNextFreeByte
+ 131              		.cfi_endproc
+ 132              	.LFE4:
+ 134              		.section	.text.vPortFree,"ax",%progbits
+ 135              		.align	2
+ 136              		.global	vPortFree
+ 137              		.thumb
+ 138              		.thumb_func
+ 140              	vPortFree:
+ 141              	.LFB5:
+ 161:../src/RTOS/heap_1.c **** /*-----------------------------------------------------------*/
+ 162:../src/RTOS/heap_1.c **** 
+ 163:../src/RTOS/heap_1.c **** void vPortFree( void *pv )
+ 164:../src/RTOS/heap_1.c **** {
+ 142              		.loc 1 164 0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 8
+ 145              		@ frame_needed = 1, uses_anonymous_args = 0
+ 146              		@ link register save eliminated.
+ 147 0000 80B4     		push	{r7}
+ 148              		.cfi_def_cfa_offset 4
+ 149              		.cfi_offset 7, -4
+ 150 0002 83B0     		sub	sp, sp, #12
+ 151              		.cfi_def_cfa_offset 16
+ 152 0004 00AF     		add	r7, sp, #0
+ 153              		.cfi_def_cfa_register 7
+ 154 0006 7860     		str	r0, [r7, #4]
+ 165:../src/RTOS/heap_1.c **** 	/* Memory cannot be freed using this scheme.  See heap_2.c, heap_3.c and
+ 166:../src/RTOS/heap_1.c **** 	heap_4.c for alternative implementations, and the memory management pages of
+ 167:../src/RTOS/heap_1.c **** 	http://www.FreeRTOS.org for more information. */
+ 168:../src/RTOS/heap_1.c **** 	( void ) pv;
+ 169:../src/RTOS/heap_1.c **** 
+ 170:../src/RTOS/heap_1.c **** 	/* Force an assert as it is invalid to call this function. */
+ 171:../src/RTOS/heap_1.c **** 	configASSERT( pv == NULL );
+ 155              		.loc 1 171 0
+ 156 0008 7B68     		ldr	r3, [r7, #4]
+ 157 000a 002B     		cmp	r3, #0
+ 158 000c 00D0     		beq	.L8
+ 159              	.L10:
+ 160              		.loc 1 171 0 is_stmt 0 discriminator 1
+ 161 000e FEE7     		b	.L10
+ 162              	.L8:
+ 172:../src/RTOS/heap_1.c **** }
+ 163              		.loc 1 172 0 is_stmt 1
+ 164 0010 0C37     		adds	r7, r7, #12
+ 165              		.cfi_def_cfa_offset 4
+ 166 0012 BD46     		mov	sp, r7
+ 167              		.cfi_def_cfa_register 13
+ 168              		@ sp needed
+ 169 0014 5DF8047B 		ldr	r7, [sp], #4
+ 170              		.cfi_restore 7
+ 171              		.cfi_def_cfa_offset 0
+ 172 0018 7047     		bx	lr
+ 173              		.cfi_endproc
+ 174              	.LFE5:
+ 176 001a 00BF     		.section	.text.vPortInitialiseBlocks,"ax",%progbits
+ 177              		.align	2
+ 178              		.global	vPortInitialiseBlocks
+ 179              		.thumb
+ 180              		.thumb_func
+ 182              	vPortInitialiseBlocks:
+ 183              	.LFB6:
+ 173:../src/RTOS/heap_1.c **** /*-----------------------------------------------------------*/
+ 174:../src/RTOS/heap_1.c **** 
+ 175:../src/RTOS/heap_1.c **** void vPortInitialiseBlocks( void )
+ 176:../src/RTOS/heap_1.c **** {
+ 184              		.loc 1 176 0
+ 185              		.cfi_startproc
+ 186              		@ args = 0, pretend = 0, frame = 0
+ 187              		@ frame_needed = 1, uses_anonymous_args = 0
+ 188              		@ link register save eliminated.
+ 189 0000 80B4     		push	{r7}
+ 190              		.cfi_def_cfa_offset 4
+ 191              		.cfi_offset 7, -4
+ 192 0002 00AF     		add	r7, sp, #0
+ 193              		.cfi_def_cfa_register 7
+ 177:../src/RTOS/heap_1.c **** 	/* Only required when static memory is not cleared. */
+ 178:../src/RTOS/heap_1.c **** 	xNextFreeByte = ( size_t ) 0;
+ 194              		.loc 1 178 0
+ 195 0004 034B     		ldr	r3, .L12
+ 196 0006 0022     		movs	r2, #0
+ 197 0008 1A60     		str	r2, [r3]
+ 179:../src/RTOS/heap_1.c **** }
+ 198              		.loc 1 179 0
+ 199 000a BD46     		mov	sp, r7
+ 200              		.cfi_def_cfa_register 13
+ 201              		@ sp needed
+ 202 000c 5DF8047B 		ldr	r7, [sp], #4
+ 203              		.cfi_restore 7
+ 204              		.cfi_def_cfa_offset 0
+ 205 0010 7047     		bx	lr
+ 206              	.L13:
+ 207 0012 00BF     		.align	2
+ 208              	.L12:
+ 209 0014 00000000 		.word	xNextFreeByte
+ 210              		.cfi_endproc
+ 211              	.LFE6:
+ 213              		.section	.text.xPortGetFreeHeapSize,"ax",%progbits
+ 214              		.align	2
+ 215              		.global	xPortGetFreeHeapSize
+ 216              		.thumb
+ 217              		.thumb_func
+ 219              	xPortGetFreeHeapSize:
+ 220              	.LFB7:
+ 180:../src/RTOS/heap_1.c **** /*-----------------------------------------------------------*/
+ 181:../src/RTOS/heap_1.c **** 
+ 182:../src/RTOS/heap_1.c **** size_t xPortGetFreeHeapSize( void )
+ 183:../src/RTOS/heap_1.c **** {
+ 221              		.loc 1 183 0
+ 222              		.cfi_startproc
+ 223              		@ args = 0, pretend = 0, frame = 0
+ 224              		@ frame_needed = 1, uses_anonymous_args = 0
+ 225              		@ link register save eliminated.
+ 226 0000 80B4     		push	{r7}
+ 227              		.cfi_def_cfa_offset 4
+ 228              		.cfi_offset 7, -4
+ 229 0002 00AF     		add	r7, sp, #0
+ 230              		.cfi_def_cfa_register 7
+ 184:../src/RTOS/heap_1.c **** 	return ( configADJUSTED_HEAP_SIZE - xNextFreeByte );
+ 231              		.loc 1 184 0
+ 232 0004 044B     		ldr	r3, .L16
+ 233 0006 1B68     		ldr	r3, [r3]
+ 234 0008 C3F57F53 		rsb	r3, r3, #16320
+ 235 000c 3833     		adds	r3, r3, #56
+ 185:../src/RTOS/heap_1.c **** }
+ 236              		.loc 1 185 0
+ 237 000e 1846     		mov	r0, r3
+ 238 0010 BD46     		mov	sp, r7
+ 239              		.cfi_def_cfa_register 13
+ 240              		@ sp needed
+ 241 0012 5DF8047B 		ldr	r7, [sp], #4
+ 242              		.cfi_restore 7
+ 243              		.cfi_def_cfa_offset 0
+ 244 0016 7047     		bx	lr
+ 245              	.L17:
+ 246              		.align	2
+ 247              	.L16:
+ 248 0018 00000000 		.word	xNextFreeByte
+ 249              		.cfi_endproc
+ 250              	.LFE7:
+ 252              		.section	.bss.pucAlignedHeap.5029,"aw",%nobits
+ 253              		.align	2
+ 256              	pucAlignedHeap.5029:
+ 257 0000 00000000 		.space	4
+ 258              		.text
+ 259              	.Letext0:
+ 260              		.file 2 "c:\\program files (x86)\\emprog\\thunderbench-arm-v3.85\\arm\\lib\\gcc\\arm-none-eabi\\4.
+ 261              		.file 3 "c:\\program files (x86)\\emprog\\thunderbench-arm-v3.85\\arm\\arm-none-eabi\\include\\mac
+ 262              		.file 4 "c:\\program files (x86)\\emprog\\thunderbench-arm-v3.85\\arm\\arm-none-eabi\\include\\std
+DEFINED SYMBOLS
+                            *ABS*:00000000 heap_1.c
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:19     .bss.ucHeap:00000000 $d
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:22     .bss.ucHeap:00000000 ucHeap
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:25     .bss.xNextFreeByte:00000000 $d
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:28     .bss.xNextFreeByte:00000000 xNextFreeByte
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:31     .text.pvPortMalloc:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:36     .text.pvPortMalloc:00000000 pvPortMalloc
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:128    .text.pvPortMalloc:00000080 $d
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:256    .bss.pucAlignedHeap.5029:00000000 pucAlignedHeap.5029
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:135    .text.vPortFree:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:140    .text.vPortFree:00000000 vPortFree
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:177    .text.vPortInitialiseBlocks:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:182    .text.vPortInitialiseBlocks:00000000 vPortInitialiseBlocks
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:209    .text.vPortInitialiseBlocks:00000014 $d
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:214    .text.xPortGetFreeHeapSize:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:219    .text.xPortGetFreeHeapSize:00000000 xPortGetFreeHeapSize
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:248    .text.xPortGetFreeHeapSize:00000018 $d
+C:\Users\Riley\AppData\Local\Temp\ccnViMWy.s:253    .bss.pucAlignedHeap.5029:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+vTaskSuspendAll
+xTaskResumeAll

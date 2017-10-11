@@ -1,0 +1,1150 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.comm	PuffSem,4,4
+  19              		.comm	LEDSem,4,4
+  20              		.comm	LEDRedMut,4,4
+  21              		.comm	LEDGreenMut,4,4
+  22              		.comm	LEDBlueMut,4,4
+  23              		.global	xLEDTask
+  24              		.section	.bss.xLEDTask,"aw",%nobits
+  25              		.align	2
+  28              	xLEDTask:
+  29 0000 00000000 		.space	4
+  30              		.global	xPWMTask
+  31              		.section	.bss.xPWMTask,"aw",%nobits
+  32              		.align	2
+  35              	xPWMTask:
+  36 0000 00000000 		.space	4
+  37              		.global	xDACTask
+  38              		.section	.bss.xDACTask,"aw",%nobits
+  39              		.align	2
+  42              	xDACTask:
+  43 0000 00000000 		.space	4
+  44              		.comm	HighWaterMark,4,4
+  45              		.section	.text.ButtonPress,"ax",%progbits
+  46              		.align	2
+  47              		.global	ButtonPress
+  48              		.thumb
+  49              		.thumb_func
+  51              	ButtonPress:
+  52              	.LFB61:
+  53              		.file 1 "../src/main.c"
+   1:../src/main.c **** /**
+   2:../src/main.c **** *****************************************************************************
+   3:../src/main.c **** **
+   4:../src/main.c **** **  File  (created by ThunderBench):  main.c v1.2
+   5:../src/main.c **** **
+   6:../src/main.c **** **  Snipet      : main function.
+   7:../src/main.c **** **
+   8:../src/main.c **** **  Functions   : main
+   9:../src/main.c **** **
+  10:../src/main.c **** **  Distribution: The file is distributed “as is,” without any warranty
+  11:../src/main.c **** **                of any kind.
+  12:../src/main.c **** **
+  13:../src/main.c **** *****************************************************************************
+  14:../src/main.c **** */
+  15:../src/main.c **** 
+  16:../src/main.c **** /* Includes */
+  17:../src/main.c **** #include "../Libraries/includes.h"
+  18:../src/main.c **** 
+  19:../src/main.c **** /* defines */
+  20:../src/main.c **** #define MASK_RUN    (1<<2)
+  21:../src/main.c **** #define MEM_SIZE    250
+  22:../src/main.c **** #define PWM_FREQ    200000
+  23:../src/main.c **** #define PWM_PER     configCPU_CLOCK_HZ/PWM_FREQ
+  24:../src/main.c **** #define RUN_DIS()   GPIO->P[0].DOUTCLR = MASK_RUN
+  25:../src/main.c **** #define RUN_EN()    GPIO->P[0].DOUTSET = MASK_RUN
+  26:../src/main.c **** #define PUMP2_EN()  GPIO->P[4].MODEH |=  4<<4*(8-8)
+  27:../src/main.c **** #define PUMP2_DIS() GPIO->P[4].MODEH &= ~0xf<<4*(8-8)
+  28:../src/main.c **** #define PUMP_EN()   GPIO->P[4].DOUTSET = 1<<9
+  29:../src/main.c **** #define PUMP_DIS()  GPIO->P[4].DOUTCLR = 1<<9
+  30:../src/main.c **** #define PUMP_TGL()  GPIO->P[4].DOUTTGL = 1<<9
+  31:../src/main.c **** /******************************************************************************
+  32:../src/main.c ****  *              Typedefs and globals
+  33:../src/main.c ****  */
+  34:../src/main.c **** #define DI_CMU_LFRCOCTRL (0xFE08028)
+  35:../src/main.c **** 
+  36:../src/main.c **** TaskHandle_t xLEDTask = NULL;
+  37:../src/main.c **** TaskHandle_t xPWMTask = NULL;
+  38:../src/main.c **** TaskHandle_t xDACTask = NULL;
+  39:../src/main.c **** 
+  40:../src/main.c **** UBaseType_t HighWaterMark;
+  41:../src/main.c **** /******************************************************************************
+  42:../src/main.c ****  *              Function Prototypes
+  43:../src/main.c **** */
+  44:../src/main.c **** //Tasks
+  45:../src/main.c **** void ButtonTask(void * pvParameters);
+  46:../src/main.c **** void PWMTask(void * pvParameters);
+  47:../src/main.c **** void DACTask(void * pvParameters);
+  48:../src/main.c **** //Other Functions
+  49:../src/main.c **** void ChangePWMDC(int32_t dc, CONVERTERSTATETYPE state);
+  50:../src/main.c **** void ButtonPress(void);
+  51:../src/main.c **** void ButtonRelease(void);
+  52:../src/main.c **** /******************************************************************************
+  53:../src/main.c **** *               Function Definitions
+  54:../src/main.c **** */
+  55:../src/main.c **** #if 0
+  56:../src/main.c **** /****************** DACTask()
+  57:../src/main.c ****  * Description:     Initializes and controls the DAC and runs the battery charger
+  58:../src/main.c ****  * Params           none
+  59:../src/main.c ****  * Return           none
+  60:../src/main.c ****  * Last Edited:     12/22/2015 RTC
+  61:../src/main.c ****  */
+  62:../src/main.c **** void DACTask(void * pvParameters)
+  63:../src/main.c **** {
+  64:../src/main.c ****     uint32_t bat;
+  65:../src/main.c ****     uint32_t dac = 0;
+  66:../src/main.c ****     uint32_t curr = 0;
+  67:../src/main.c ****     //Init the DAC
+  68:../src/main.c ****     DAC0->CTRL = 0x0130;
+  69:../src/main.c ****     DAC0->CH0CTRL = 0x0001;
+  70:../src/main.c ****     DAC0->CH0DATA = dac;
+  71:../src/main.c ****     while(1)
+  72:../src/main.c ****     {
+  73:../src/main.c ****         xTaskNotifyWait(0, 0xffffffff, &bat, portMAX_DELAY);
+  74:../src/main.c ****         dac = curr*3/10 + bat;  // Calculating Vdac in mv
+  75:../src/main.c ****         dac = (dac*0xfff)/4250; // Convert Vdac to ndac
+  76:../src/main.c ****         DAC0->CH0DATA = dac;
+  77:../src/main.c ****     }
+  78:../src/main.c **** }
+  79:../src/main.c **** #endif
+  80:../src/main.c **** /****************** ButtonPress()
+  81:../src/main.c ****  * Description:     Handles what action is take during a button press.
+  82:../src/main.c ****  * Params           none
+  83:../src/main.c ****  * Return           none
+  84:../src/main.c ****  * Date Created:    12/4/15 RTC
+  85:../src/main.c ****  */
+  86:../src/main.c **** void ButtonPress(void)
+  87:../src/main.c **** {
+  54              		.loc 1 87 0
+  55              		.cfi_startproc
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 1, uses_anonymous_args = 0
+  58              		@ link register save eliminated.
+  59 0000 80B4     		push	{r7}
+  60              		.cfi_def_cfa_offset 4
+  61              		.cfi_offset 7, -4
+  62 0002 00AF     		add	r7, sp, #0
+  63              		.cfi_def_cfa_register 7
+  88:../src/main.c ****     static int32_t i = 0;
+  89:../src/main.c ****     //xTaskNotifyGive(xPWMTask);
+  90:../src/main.c ****     //xTaskNotifyGive(xLEDTask);
+  91:../src/main.c ****     GPIO->P[4].MODEH |=  4<<4*(8-8);    //PUMP2_EN();
+  64              		.loc 1 91 0
+  65 0004 084A     		ldr	r2, .L2
+  66 0006 084B     		ldr	r3, .L2
+  67 0008 D3F89830 		ldr	r3, [r3, #152]
+  68 000c 43F00403 		orr	r3, r3, #4
+  69 0010 C2F89830 		str	r3, [r2, #152]
+  92:../src/main.c ****     GPIO->P[4].DOUTSET = 1<<9;          // PUMP_EN();
+  70              		.loc 1 92 0
+  71 0014 044B     		ldr	r3, .L2
+  72 0016 4FF40072 		mov	r2, #512
+  73 001a C3F8A020 		str	r2, [r3, #160]
+  93:../src/main.c **** #if 0
+  94:../src/main.c ****     ChangePWMDC(18, BOOST);
+  95:../src/main.c **** #endif
+  96:../src/main.c **** #if 0
+  97:../src/main.c ****     ChangePWMDC(i, BUCK);
+  98:../src/main.c ****     if (i <= 100)
+  99:../src/main.c ****     {
+ 100:../src/main.c ****         i += 4;
+ 101:../src/main.c ****     }
+ 102:../src/main.c ****     else
+ 103:../src/main.c ****     {
+ 104:../src/main.c ****         i = 0;
+ 105:../src/main.c ****     }
+ 106:../src/main.c **** #endif
+ 107:../src/main.c **** #if 0
+ 108:../src/main.c ****     for (i = 0; i <= 100; i += 4)
+ 109:../src/main.c ****     {
+ 110:../src/main.c ****         ChangePWMDC(i, BUCK);
+ 111:../src/main.c ****         LEDChangePixels(0x80, BLUE);
+ 112:../src/main.c ****         vTaskDelay(2000);
+ 113:../src/main.c ****         ChangePWMDC(-1, BUCK);
+ 114:../src/main.c ****         LEDChangePixels(0x80, BLACK);
+ 115:../src/main.c ****         vTaskDelay(2000);
+ 116:../src/main.c ****     }
+ 117:../src/main.c **** #endif
+ 118:../src/main.c **** }
+  74              		.loc 1 118 0
+  75 001e BD46     		mov	sp, r7
+  76              		.cfi_def_cfa_register 13
+  77              		@ sp needed
+  78 0020 5DF8047B 		ldr	r7, [sp], #4
+  79              		.cfi_restore 7
+  80              		.cfi_def_cfa_offset 0
+  81 0024 7047     		bx	lr
+  82              	.L3:
+  83 0026 00BF     		.align	2
+  84              	.L2:
+  85 0028 00600040 		.word	1073766400
+  86              		.cfi_endproc
+  87              	.LFE61:
+  89              		.section	.text.ButtonRelease,"ax",%progbits
+  90              		.align	2
+  91              		.global	ButtonRelease
+  92              		.thumb
+  93              		.thumb_func
+  95              	ButtonRelease:
+  96              	.LFB62:
+ 119:../src/main.c **** 
+ 120:../src/main.c **** /****************** ButtonRelease()
+ 121:../src/main.c ****  * Description:     Handles what action is take during a button release.
+ 122:../src/main.c ****  * Params           none
+ 123:../src/main.c ****  * Return           none
+ 124:../src/main.c ****  * Date Created:    12/4/15 RTC
+ 125:../src/main.c ****  */
+ 126:../src/main.c **** void ButtonRelease(void)
+ 127:../src/main.c **** {
+  97              		.loc 1 127 0
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 1, uses_anonymous_args = 0
+ 101 0000 80B5     		push	{r7, lr}
+ 102              		.cfi_def_cfa_offset 8
+ 103              		.cfi_offset 7, -8
+ 104              		.cfi_offset 14, -4
+ 105 0002 00AF     		add	r7, sp, #0
+ 106              		.cfi_def_cfa_register 7
+ 128:../src/main.c ****     ChangePWMDC(-1, BOOST);
+ 107              		.loc 1 128 0
+ 108 0004 4FF0FF30 		mov	r0, #-1
+ 109 0008 0121     		movs	r1, #1
+ 110 000a FFF7FEFF 		bl	ChangePWMDC
+ 129:../src/main.c ****     PUMP_DIS();
+ 111              		.loc 1 129 0
+ 112 000e 074B     		ldr	r3, .L5
+ 113 0010 4FF40072 		mov	r2, #512
+ 114 0014 C3F8A420 		str	r2, [r3, #164]
+ 130:../src/main.c ****     PUMP2_DIS();
+ 115              		.loc 1 130 0
+ 116 0018 044A     		ldr	r2, .L5
+ 117 001a 044B     		ldr	r3, .L5
+ 118 001c D3F89830 		ldr	r3, [r3, #152]
+ 119 0020 23F00F03 		bic	r3, r3, #15
+ 120 0024 C2F89830 		str	r3, [r2, #152]
+ 131:../src/main.c **** }
+ 121              		.loc 1 131 0
+ 122 0028 80BD     		pop	{r7, pc}
+ 123              	.L6:
+ 124 002a 00BF     		.align	2
+ 125              	.L5:
+ 126 002c 00600040 		.word	1073766400
+ 127              		.cfi_endproc
+ 128              	.LFE62:
+ 130              		.section	.text.ButtonTask,"ax",%progbits
+ 131              		.align	2
+ 132              		.global	ButtonTask
+ 133              		.thumb
+ 134              		.thumb_func
+ 136              	ButtonTask:
+ 137              	.LFB63:
+ 132:../src/main.c **** 
+ 133:../src/main.c **** /****************** ButtonTask()
+ 134:../src/main.c ****  * Description:     Handles button presses.  The button is PAE12.
+ 135:../src/main.c ****  * Params           none
+ 136:../src/main.c ****  * Return           none
+ 137:../src/main.c ****  * Last Edited:     11/16/15 RTC
+ 138:../src/main.c ****  */
+ 139:../src/main.c **** #define BUTTONISPRESSED !(GPIO->P[4].DIN&(1<<12))   //active low button
+ 140:../src/main.c **** #define BUTTONDELAY     10  // ms delay for task
+ 141:../src/main.c **** void ButtonTask(void *pvParameters)
+ 142:../src/main.c **** {
+ 138              		.loc 1 142 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 16
+ 141              		@ frame_needed = 1, uses_anonymous_args = 0
+ 142 0000 80B5     		push	{r7, lr}
+ 143              		.cfi_def_cfa_offset 8
+ 144              		.cfi_offset 7, -8
+ 145              		.cfi_offset 14, -4
+ 146 0002 84B0     		sub	sp, sp, #16
+ 147              		.cfi_def_cfa_offset 24
+ 148 0004 00AF     		add	r7, sp, #0
+ 149              		.cfi_def_cfa_register 7
+ 150 0006 7860     		str	r0, [r7, #4]
+ 143:../src/main.c ****     BUTTONSTATETYPE button1 = BUTOFF;
+ 151              		.loc 1 143 0
+ 152 0008 0023     		movs	r3, #0
+ 153 000a FB73     		strb	r3, [r7, #15]
+ 144:../src/main.c ****     //Main button init (PE12)
+ 145:../src/main.c ****     GPIO->P[4].MODEH &= ~0xf<<4*(12-8);	//g_pGPIO->PA_MODEL &= ~0xf;
+ 154              		.loc 1 145 0
+ 155 000c 304A     		ldr	r2, .L19
+ 156 000e 304B     		ldr	r3, .L19
+ 157 0010 D3F89830 		ldr	r3, [r3, #152]
+ 158 0014 1B0D     		lsrs	r3, r3, #20
+ 159 0016 1B05     		lsls	r3, r3, #20
+ 160 0018 C2F89830 		str	r3, [r2, #152]
+ 146:../src/main.c ****     GPIO->P[4].MODEH |=  0x3<<4*(12-8);	//g_pGPIO->PA_MODEL |=  0x3;
+ 161              		.loc 1 146 0
+ 162 001c 2C4A     		ldr	r2, .L19
+ 163 001e 2C4B     		ldr	r3, .L19
+ 164 0020 D3F89830 		ldr	r3, [r3, #152]
+ 165 0024 43F44033 		orr	r3, r3, #196608
+ 166 0028 C2F89830 		str	r3, [r2, #152]
+ 147:../src/main.c ****     GPIO->P[4].DOUTSET = 1<<12;			//g_pGPIO->PA_DOUTSET = 1<<0;
+ 167              		.loc 1 147 0
+ 168 002c 284B     		ldr	r3, .L19
+ 169 002e 4FF48052 		mov	r2, #4096
+ 170 0032 C3F8A020 		str	r2, [r3, #160]
+ 148:../src/main.c ****     /* Init the Pump MICROA PE8 (active LOW) and MICROB PE9 (active HIGH) */
+ 149:../src/main.c ****     PUMP_DIS();
+ 171              		.loc 1 149 0
+ 172 0036 264B     		ldr	r3, .L19
+ 173 0038 4FF40072 		mov	r2, #512
+ 174 003c C3F8A420 		str	r2, [r3, #164]
+ 150:../src/main.c ****     PUMP2_DIS();
+ 175              		.loc 1 150 0
+ 176 0040 234A     		ldr	r2, .L19
+ 177 0042 234B     		ldr	r3, .L19
+ 178 0044 D3F89830 		ldr	r3, [r3, #152]
+ 179 0048 23F00F03 		bic	r3, r3, #15
+ 180 004c C2F89830 		str	r3, [r2, #152]
+ 151:../src/main.c ****     GPIO->P[4].DOUTCLR = 1<<8;          //Pump init (MICROA, PE8)
+ 181              		.loc 1 151 0
+ 182 0050 1F4B     		ldr	r3, .L19
+ 183 0052 4FF48072 		mov	r2, #256
+ 184 0056 C3F8A420 		str	r2, [r3, #164]
+ 152:../src/main.c ****     GPIO->P[4].MODEH |= 0x4<<4*(9-8);   //Pump2 init (MICROB, PE9)
+ 185              		.loc 1 152 0
+ 186 005a 1D4A     		ldr	r2, .L19
+ 187 005c 1C4B     		ldr	r3, .L19
+ 188 005e D3F89830 		ldr	r3, [r3, #152]
+ 189 0062 43F04003 		orr	r3, r3, #64
+ 190 0066 C2F89830 		str	r3, [r2, #152]
+ 191              	.L17:
+ 153:../src/main.c ****     // Loop
+ 154:../src/main.c ****     while (1) {
+ 155:../src/main.c ****         vTaskDelay(BUTTONDELAY);
+ 192              		.loc 1 155 0
+ 193 006a 0A20     		movs	r0, #10
+ 194 006c FFF7FEFF 		bl	vTaskDelay
+ 156:../src/main.c ****         switch (button1) {
+ 195              		.loc 1 156 0
+ 196 0070 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 197 0072 012B     		cmp	r3, #1
+ 198 0074 0FD0     		beq	.L9
+ 199 0076 022B     		cmp	r3, #2
+ 200 0078 19D0     		beq	.L10
+ 201 007a 002B     		cmp	r3, #0
+ 202 007c 00D0     		beq	.L11
+ 157:../src/main.c ****         case BUTOFF:
+ 158:../src/main.c ****             if (BUTTONISPRESSED)
+ 159:../src/main.c ****             {
+ 160:../src/main.c ****                 button1 = BUTWAIT;
+ 161:../src/main.c ****             }
+ 162:../src/main.c ****             break;
+ 163:../src/main.c ****         case BUTON:
+ 164:../src/main.c ****             if (!BUTTONISPRESSED)
+ 165:../src/main.c ****             {
+ 166:../src/main.c ****                 ButtonRelease();
+ 167:../src/main.c ****                 button1 = BUTOFF;
+ 168:../src/main.c ****             }
+ 169:../src/main.c ****             else
+ 170:../src/main.c ****             {
+ 171:../src/main.c ****                 /* holding button press action */
+ 172:../src/main.c ****             }
+ 173:../src/main.c ****             break;
+ 174:../src/main.c ****         case BUTWAIT:
+ 175:../src/main.c ****             if (BUTTONISPRESSED)
+ 176:../src/main.c ****             {
+ 177:../src/main.c ****             	//ADD PRESS BUTTON ACTION HERE
+ 178:../src/main.c ****                 ButtonPress();
+ 179:../src/main.c ****                 button1 = BUTON;
+ 180:../src/main.c ****             }
+ 181:../src/main.c ****             else
+ 182:../src/main.c ****             {
+ 183:../src/main.c ****                 button1 = BUTOFF;
+ 184:../src/main.c ****             }
+ 185:../src/main.c ****             break;
+ 186:../src/main.c ****         default:
+ 187:../src/main.c ****             // failure of some sort
+ 188:../src/main.c ****             break;
+ 203              		.loc 1 188 0
+ 204 007e 25E0     		b	.L13
+ 205              	.L11:
+ 158:../src/main.c ****             {
+ 206              		.loc 1 158 0
+ 207 0080 134B     		ldr	r3, .L19
+ 208 0082 D3F8AC30 		ldr	r3, [r3, #172]
+ 209 0086 03F48053 		and	r3, r3, #4096
+ 210 008a 002B     		cmp	r3, #0
+ 211 008c 02D1     		bne	.L12
+ 160:../src/main.c ****             }
+ 212              		.loc 1 160 0
+ 213 008e 0223     		movs	r3, #2
+ 214 0090 FB73     		strb	r3, [r7, #15]
+ 162:../src/main.c ****         case BUTON:
+ 215              		.loc 1 162 0
+ 216 0092 1BE0     		b	.L13
+ 217              	.L12:
+ 218 0094 1AE0     		b	.L13
+ 219              	.L9:
+ 164:../src/main.c ****             {
+ 220              		.loc 1 164 0
+ 221 0096 0E4B     		ldr	r3, .L19
+ 222 0098 D3F8AC30 		ldr	r3, [r3, #172]
+ 223 009c 03F48053 		and	r3, r3, #4096
+ 224 00a0 002B     		cmp	r3, #0
+ 225 00a2 03D0     		beq	.L14
+ 166:../src/main.c ****                 button1 = BUTOFF;
+ 226              		.loc 1 166 0
+ 227 00a4 FFF7FEFF 		bl	ButtonRelease
+ 167:../src/main.c ****             }
+ 228              		.loc 1 167 0
+ 229 00a8 0023     		movs	r3, #0
+ 230 00aa FB73     		strb	r3, [r7, #15]
+ 231              	.L14:
+ 173:../src/main.c ****         case BUTWAIT:
+ 232              		.loc 1 173 0 discriminator 2
+ 233 00ac 0EE0     		b	.L13
+ 234              	.L10:
+ 175:../src/main.c ****             {
+ 235              		.loc 1 175 0
+ 236 00ae 084B     		ldr	r3, .L19
+ 237 00b0 D3F8AC30 		ldr	r3, [r3, #172]
+ 238 00b4 03F48053 		and	r3, r3, #4096
+ 239 00b8 002B     		cmp	r3, #0
+ 240 00ba 04D1     		bne	.L15
+ 178:../src/main.c ****                 button1 = BUTON;
+ 241              		.loc 1 178 0
+ 242 00bc FFF7FEFF 		bl	ButtonPress
+ 179:../src/main.c ****             }
+ 243              		.loc 1 179 0
+ 244 00c0 0123     		movs	r3, #1
+ 245 00c2 FB73     		strb	r3, [r7, #15]
+ 185:../src/main.c ****         default:
+ 246              		.loc 1 185 0
+ 247 00c4 01E0     		b	.L18
+ 248              	.L15:
+ 183:../src/main.c ****             }
+ 249              		.loc 1 183 0
+ 250 00c6 0023     		movs	r3, #0
+ 251 00c8 FB73     		strb	r3, [r7, #15]
+ 252              	.L18:
+ 185:../src/main.c ****         default:
+ 253              		.loc 1 185 0
+ 254 00ca 00BF     		nop
+ 255              	.L13:
+ 189:../src/main.c ****         }
+ 190:../src/main.c ****     }
+ 256              		.loc 1 190 0 discriminator 1
+ 257 00cc CDE7     		b	.L17
+ 258              	.L20:
+ 259 00ce 00BF     		.align	2
+ 260              	.L19:
+ 261 00d0 00600040 		.word	1073766400
+ 262              		.cfi_endproc
+ 263              	.LFE63:
+ 265              		.section	.text.ChangePWMDC,"ax",%progbits
+ 266              		.align	2
+ 267              		.global	ChangePWMDC
+ 268              		.thumb
+ 269              		.thumb_func
+ 271              	ChangePWMDC:
+ 272              	.LFB64:
+ 191:../src/main.c **** }
+ 192:../src/main.c **** #define DEADTIME 1
+ 193:../src/main.c **** /****************** ChangePWMDC()
+ 194:../src/main.c ****  * Description:     Change the PWM duty cycle
+ 195:../src/main.c ****  * Params           dc: 0-100 - percent duty cycle
+ 196:../src/main.c ****  *                      -1    - turn off both lines
+ 197:../src/main.c ****  *                  state: {BOOST, BUCK}
+ 198:../src/main.c ****  * Returns:         None
+ 199:../src/main.c ****  * Date Created:    11/19/15 RTC
+ 200:../src/main.c ****  */
+ 201:../src/main.c **** void ChangePWMDC(int32_t dc, CONVERTERSTATETYPE state)
+ 202:../src/main.c **** {
+ 273              		.loc 1 202 0
+ 274              		.cfi_startproc
+ 275              		@ args = 0, pretend = 0, frame = 16
+ 276              		@ frame_needed = 1, uses_anonymous_args = 0
+ 277              		@ link register save eliminated.
+ 278 0000 80B4     		push	{r7}
+ 279              		.cfi_def_cfa_offset 4
+ 280              		.cfi_offset 7, -4
+ 281 0002 85B0     		sub	sp, sp, #20
+ 282              		.cfi_def_cfa_offset 24
+ 283 0004 00AF     		add	r7, sp, #0
+ 284              		.cfi_def_cfa_register 7
+ 285 0006 7860     		str	r0, [r7, #4]
+ 286 0008 0B46     		mov	r3, r1
+ 287 000a FB70     		strb	r3, [r7, #3]
+ 203:../src/main.c ****     uint16_t ccvb = (dc*PWM_PER)/100;
+ 288              		.loc 1 203 0
+ 289 000c 7B68     		ldr	r3, [r7, #4]
+ 290 000e 354A     		ldr	r2, .L28
+ 291 0010 02FB03F3 		mul	r3, r2, r3
+ 292 0014 344A     		ldr	r2, .L28+4
+ 293 0016 82FB0312 		smull	r1, r2, r2, r3
+ 294 001a D215     		asrs	r2, r2, #23
+ 295 001c DB17     		asrs	r3, r3, #31
+ 296 001e D31A     		subs	r3, r2, r3
+ 297 0020 FB81     		strh	r3, [r7, #14]	@ movhi
+ 204:../src/main.c ****     if (state == BOOST)
+ 298              		.loc 1 204 0
+ 299 0022 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 300 0024 012B     		cmp	r3, #1
+ 301 0026 37D1     		bne	.L22
+ 205:../src/main.c ****     {
+ 206:../src/main.c ****         ccvb /= 2;
+ 302              		.loc 1 206 0
+ 303 0028 FB89     		ldrh	r3, [r7, #14]
+ 304 002a 5B08     		lsrs	r3, r3, #1
+ 305 002c FB81     		strh	r3, [r7, #14]	@ movhi
+ 207:../src/main.c ****         if (dc == 0)
+ 306              		.loc 1 207 0
+ 307 002e 7B68     		ldr	r3, [r7, #4]
+ 308 0030 002B     		cmp	r3, #0
+ 309 0032 09D1     		bne	.L23
+ 208:../src/main.c ****         {
+ 209:../src/main.c ****             TIMER1->CC[0].CCVB = PWM_PER + 1;
+ 310              		.loc 1 209 0
+ 311 0034 2D4B     		ldr	r3, .L28+8
+ 312 0036 8D22     		movs	r2, #141
+ 313 0038 DA63     		str	r2, [r3, #60]
+ 210:../src/main.c ****             TIMER0->CC[2].CCVB = 0;
+ 314              		.loc 1 210 0
+ 315 003a 2D4B     		ldr	r3, .L28+12
+ 316 003c 0022     		movs	r2, #0
+ 317 003e DA65     		str	r2, [r3, #92]
+ 211:../src/main.c ****             TIMER0->CC[2].CCVB = 0;
+ 318              		.loc 1 211 0
+ 319 0040 2B4B     		ldr	r3, .L28+12
+ 320 0042 0022     		movs	r2, #0
+ 321 0044 DA65     		str	r2, [r3, #92]
+ 322 0046 47E0     		b	.L21
+ 323              	.L23:
+ 212:../src/main.c ****         }
+ 213:../src/main.c ****         else if ((dc <= 100) && (dc > 0))
+ 324              		.loc 1 213 0
+ 325 0048 7B68     		ldr	r3, [r7, #4]
+ 326 004a 642B     		cmp	r3, #100
+ 327 004c 0DDC     		bgt	.L25
+ 328              		.loc 1 213 0 is_stmt 0 discriminator 1
+ 329 004e 7B68     		ldr	r3, [r7, #4]
+ 330 0050 002B     		cmp	r3, #0
+ 331 0052 0ADD     		ble	.L25
+ 214:../src/main.c ****         {
+ 215:../src/main.c ****             TIMER1->CC[0].CCVB = PWM_PER + 1;
+ 332              		.loc 1 215 0 is_stmt 1
+ 333 0054 254B     		ldr	r3, .L28+8
+ 334 0056 8D22     		movs	r2, #141
+ 335 0058 DA63     		str	r2, [r3, #60]
+ 216:../src/main.c ****             TIMER0->CC[2].CCVB = ccvb;
+ 336              		.loc 1 216 0
+ 337 005a 254A     		ldr	r2, .L28+12
+ 338 005c FB89     		ldrh	r3, [r7, #14]
+ 339 005e D365     		str	r3, [r2, #92]
+ 217:../src/main.c ****             TIMER0->CC[1].CCVB = ccvb+DEADTIME;
+ 340              		.loc 1 217 0
+ 341 0060 234A     		ldr	r2, .L28+12
+ 342 0062 FB89     		ldrh	r3, [r7, #14]
+ 343 0064 0133     		adds	r3, r3, #1
+ 344 0066 D364     		str	r3, [r2, #76]
+ 345 0068 36E0     		b	.L21
+ 346              	.L25:
+ 218:../src/main.c ****         }
+ 219:../src/main.c ****         else if (dc == -1)
+ 347              		.loc 1 219 0
+ 348 006a 7B68     		ldr	r3, [r7, #4]
+ 349 006c B3F1FF3F 		cmp	r3, #-1
+ 350 0070 32D1     		bne	.L21
+ 220:../src/main.c ****         {
+ 221:../src/main.c ****             TIMER0->CC[1].CCVB = 0;
+ 351              		.loc 1 221 0
+ 352 0072 1F4B     		ldr	r3, .L28+12
+ 353 0074 0022     		movs	r2, #0
+ 354 0076 DA64     		str	r2, [r3, #76]
+ 222:../src/main.c ****             TIMER0->CC[1].CCV  = 0;
+ 355              		.loc 1 222 0
+ 356 0078 1D4B     		ldr	r3, .L28+12
+ 357 007a 0022     		movs	r2, #0
+ 358 007c 5A64     		str	r2, [r3, #68]
+ 223:../src/main.c ****             TIMER0->CC[2].CCVB = PWM_PER/2 + 1;
+ 359              		.loc 1 223 0
+ 360 007e 1C4B     		ldr	r3, .L28+12
+ 361 0080 4722     		movs	r2, #71
+ 362 0082 DA65     		str	r2, [r3, #92]
+ 224:../src/main.c ****             TIMER0->CC[2].CCV  = PWM_PER/2 + 1;
+ 363              		.loc 1 224 0
+ 364 0084 1A4B     		ldr	r3, .L28+12
+ 365 0086 4722     		movs	r2, #71
+ 366 0088 5A65     		str	r2, [r3, #84]
+ 225:../src/main.c ****             TIMER1->CC[0].CCVB = 0;
+ 367              		.loc 1 225 0
+ 368 008a 184B     		ldr	r3, .L28+8
+ 369 008c 0022     		movs	r2, #0
+ 370 008e DA63     		str	r2, [r3, #60]
+ 226:../src/main.c ****             TIMER1->CC[0].CCV  = 0;
+ 371              		.loc 1 226 0
+ 372 0090 164B     		ldr	r3, .L28+8
+ 373 0092 0022     		movs	r2, #0
+ 374 0094 5A63     		str	r2, [r3, #52]
+ 375 0096 1FE0     		b	.L21
+ 376              	.L22:
+ 227:../src/main.c ****         }
+ 228:../src/main.c ****     }
+ 229:../src/main.c ****     else if (state == BUCK)
+ 377              		.loc 1 229 0
+ 378 0098 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 379 009a 002B     		cmp	r3, #0
+ 380 009c 1CD1     		bne	.L21
+ 230:../src/main.c ****     {
+ 231:../src/main.c ****         if ((dc <= 100) && (dc >= 0))
+ 381              		.loc 1 231 0
+ 382 009e 7B68     		ldr	r3, [r7, #4]
+ 383 00a0 642B     		cmp	r3, #100
+ 384 00a2 09DC     		bgt	.L27
+ 385              		.loc 1 231 0 is_stmt 0 discriminator 1
+ 386 00a4 7B68     		ldr	r3, [r7, #4]
+ 387 00a6 002B     		cmp	r3, #0
+ 388 00a8 06DB     		blt	.L27
+ 232:../src/main.c ****         {
+ 233:../src/main.c ****             TIMER1->CC[0].CCVB = ccvb;
+ 389              		.loc 1 233 0 is_stmt 1
+ 390 00aa 104A     		ldr	r2, .L28+8
+ 391 00ac FB89     		ldrh	r3, [r7, #14]
+ 392 00ae D363     		str	r3, [r2, #60]
+ 234:../src/main.c ****             TIMER0->CC[2].CCVB = 0;
+ 393              		.loc 1 234 0
+ 394 00b0 0F4B     		ldr	r3, .L28+12
+ 395 00b2 0022     		movs	r2, #0
+ 396 00b4 DA65     		str	r2, [r3, #92]
+ 397 00b6 0FE0     		b	.L21
+ 398              	.L27:
+ 235:../src/main.c ****         }
+ 236:../src/main.c ****         else if (dc == -1)
+ 399              		.loc 1 236 0
+ 400 00b8 7B68     		ldr	r3, [r7, #4]
+ 401 00ba B3F1FF3F 		cmp	r3, #-1
+ 402 00be 0BD1     		bne	.L21
+ 237:../src/main.c ****         {
+ 238:../src/main.c ****             TIMER1->CC[0].CCVB = 0;
+ 403              		.loc 1 238 0
+ 404 00c0 0A4B     		ldr	r3, .L28+8
+ 405 00c2 0022     		movs	r2, #0
+ 406 00c4 DA63     		str	r2, [r3, #60]
+ 239:../src/main.c ****             TIMER1->CC[0].CCV  = 0;
+ 407              		.loc 1 239 0
+ 408 00c6 094B     		ldr	r3, .L28+8
+ 409 00c8 0022     		movs	r2, #0
+ 410 00ca 5A63     		str	r2, [r3, #52]
+ 240:../src/main.c ****             TIMER0->CC[2].CCVB = PWM_PER/2 + 1;
+ 411              		.loc 1 240 0
+ 412 00cc 084B     		ldr	r3, .L28+12
+ 413 00ce 4722     		movs	r2, #71
+ 414 00d0 DA65     		str	r2, [r3, #92]
+ 241:../src/main.c ****             TIMER0->CC[2].CCV  = PWM_PER/2 + 1;
+ 415              		.loc 1 241 0
+ 416 00d2 074B     		ldr	r3, .L28+12
+ 417 00d4 4722     		movs	r2, #71
+ 418 00d6 5A65     		str	r2, [r3, #84]
+ 419              	.L21:
+ 242:../src/main.c ****         }
+ 243:../src/main.c ****     }
+ 244:../src/main.c **** }
+ 420              		.loc 1 244 0
+ 421 00d8 1437     		adds	r7, r7, #20
+ 422              		.cfi_def_cfa_offset 4
+ 423 00da BD46     		mov	sp, r7
+ 424              		.cfi_def_cfa_register 13
+ 425              		@ sp needed
+ 426 00dc 5DF8047B 		ldr	r7, [sp], #4
+ 427              		.cfi_restore 7
+ 428              		.cfi_def_cfa_offset 0
+ 429 00e0 7047     		bx	lr
+ 430              	.L29:
+ 431 00e2 00BF     		.align	2
+ 432              	.L28:
+ 433 00e4 003FAB01 		.word	28000000
+ 434 00e8 6BCA5F6B 		.word	1801439851
+ 435 00ec 00040140 		.word	1073808384
+ 436 00f0 00000140 		.word	1073807360
+ 437              		.cfi_endproc
+ 438              	.LFE64:
+ 440              		.section	.text.PWMTask,"ax",%progbits
+ 441              		.align	2
+ 442              		.global	PWMTask
+ 443              		.thumb
+ 444              		.thumb_func
+ 446              	PWMTask:
+ 447              	.LFB65:
+ 245:../src/main.c **** /****************** PWMTask()
+ 246:../src/main.c ****  * Description:     Initializes and controls the PWM modules.  Runs on HFPERCLK.
+ 247:../src/main.c ****  *                  VGATE1: PA1 - TIM0 CC1 #0/#1 - L1 to GND
+ 248:../src/main.c ****  *                  VGATE4: PC3 - TIM0 CDTI1 #4  - L1 to OUT
+ 249:../src/main.c ****  *                  VGATE2: PB7 - TIM1 CC0 #3    - Safe SW
+ 250:../src/main.c ****  *                  VGATE4: PA2 - TIM0 CC2 #0/#1 - L1 to OUT ALTERNATE, must be cut (pin3 on U1)
+ 251:../src/main.c ****  * Params           None
+ 252:../src/main.c ****  * Date Created:    11/18/15 RTC
+ 253:../src/main.c ****  */
+ 254:../src/main.c **** #define TIMER0_START()   TIMER0->CMD = 1
+ 255:../src/main.c **** #define TIMER0_STOP()    TIMER0->CMD = 0
+ 256:../src/main.c **** #define TIMER1_START()   TIMER1->CMD = 1
+ 257:../src/main.c **** #define TIMER1_STOP()    TIMER1->CMD = 0
+ 258:../src/main.c **** void PWMTask(void * pvParameters)
+ 259:../src/main.c **** {
+ 448              		.loc 1 259 0
+ 449              		.cfi_startproc
+ 450              		@ args = 0, pretend = 0, frame = 16
+ 451              		@ frame_needed = 1, uses_anonymous_args = 0
+ 452 0000 80B5     		push	{r7, lr}
+ 453              		.cfi_def_cfa_offset 8
+ 454              		.cfi_offset 7, -8
+ 455              		.cfi_offset 14, -4
+ 456 0002 84B0     		sub	sp, sp, #16
+ 457              		.cfi_def_cfa_offset 24
+ 458 0004 00AF     		add	r7, sp, #0
+ 459              		.cfi_def_cfa_register 7
+ 460 0006 7860     		str	r0, [r7, #4]
+ 260:../src/main.c ****     uint16_t dc = 0;
+ 461              		.loc 1 260 0
+ 462 0008 0023     		movs	r3, #0
+ 463 000a FB81     		strh	r3, [r7, #14]	@ movhi
+ 261:../src/main.c ****     /*** Setup TIMER0 for VGATE1 and VGATE4 for BOOST mode ***/
+ 262:../src/main.c ****     TIMER0->TOPB = PWM_PER/2;
+ 464              		.loc 1 262 0
+ 465 000c 374B     		ldr	r3, .L34
+ 466 000e 4622     		movs	r2, #70
+ 467 0010 1A62     		str	r2, [r3, #32]
+ 263:../src/main.c ****     TIMER0->TOP  = PWM_PER/2;
+ 468              		.loc 1 263 0
+ 469 0012 364B     		ldr	r3, .L34
+ 470 0014 4622     		movs	r2, #70
+ 471 0016 DA61     		str	r2, [r3, #28]
+ 264:../src/main.c ****     TIMER0->CTRL |= 2;          // UP-DOWN COUNT mode (so we can manually create the deadtime)
+ 472              		.loc 1 264 0
+ 473 0018 344A     		ldr	r2, .L34
+ 474 001a 344B     		ldr	r3, .L34
+ 475 001c 1B68     		ldr	r3, [r3]
+ 476 001e 43F00203 		orr	r3, r3, #2
+ 477 0022 1360     		str	r3, [r2]
+ 265:../src/main.c ****     TIMER0->ROUTE = 1<<16       //Using position 1 for TIMER0 CC1 (PA1)
+ 478              		.loc 1 265 0
+ 479 0024 314B     		ldr	r3, .L34
+ 480 0026 324A     		ldr	r2, .L34+4
+ 481 0028 9A62     		str	r2, [r3, #40]
+ 266:../src/main.c ****             | 1<<1              //enables CC1
+ 267:../src/main.c ****             | 1<<2;             //enables CC2
+ 268:../src/main.c ****     /** Setup Primary VGATE1 (CC1) **/
+ 269:../src/main.c ****     TIMER0->CC[1].CTRL = 3<<0   //Enable PWM mode
+ 482              		.loc 1 269 0
+ 483 002a 304B     		ldr	r3, .L34
+ 484 002c 1722     		movs	r2, #23
+ 485 002e 1A64     		str	r2, [r3, #64]
+ 270:../src/main.c ****             | 1<<4              //initial value is 1.
+ 271:../src/main.c ****             | 1<<2;             //inverts output
+ 272:../src/main.c ****     GPIO->P[0].MODEL |= 4<<4*1; //Enable output on PA1
+ 486              		.loc 1 272 0
+ 487 0030 304A     		ldr	r2, .L34+8
+ 488 0032 304B     		ldr	r3, .L34+8
+ 489 0034 5B68     		ldr	r3, [r3, #4]
+ 490 0036 43F04003 		orr	r3, r3, #64
+ 491 003a 5360     		str	r3, [r2, #4]
+ 273:../src/main.c ****     GPIO->P[0].CTRL   = 2;      //Sets drive current to HIGH
+ 492              		.loc 1 273 0
+ 493 003c 2D4B     		ldr	r3, .L34+8
+ 494 003e 0222     		movs	r2, #2
+ 495 0040 1A60     		str	r2, [r3]
+ 274:../src/main.c ****     /** Setup Secondary VGATE4 (CC2) **/
+ 275:../src/main.c ****     TIMER0->CC[2].CTRL = 3<<0   //Enables PWM mode
+ 496              		.loc 1 275 0
+ 497 0042 2A4B     		ldr	r3, .L34
+ 498 0044 1322     		movs	r2, #19
+ 499 0046 1A65     		str	r2, [r3, #80]
+ 276:../src/main.c ****             | 1<<4;             //Initial value is 1
+ 277:../src/main.c ****     GPIO->P[0].MODEL |= 4<<4*2; //Enable output on PA2
+ 500              		.loc 1 277 0
+ 501 0048 2A4A     		ldr	r2, .L34+8
+ 502 004a 2A4B     		ldr	r3, .L34+8
+ 503 004c 5B68     		ldr	r3, [r3, #4]
+ 504 004e 43F48063 		orr	r3, r3, #1024
+ 505 0052 5360     		str	r3, [r2, #4]
+ 278:../src/main.c ****     ChangePWMDC(-1, BOOST);
+ 506              		.loc 1 278 0
+ 507 0054 4FF0FF30 		mov	r0, #-1
+ 508 0058 0121     		movs	r1, #1
+ 509 005a FFF7FEFF 		bl	ChangePWMDC
+ 279:../src/main.c ****     /*** Setup TIMER1 for VGATE 2 for BUCK mode ***/
+ 280:../src/main.c ****     TIMER1->TOPB = PWM_PER;
+ 510              		.loc 1 280 0
+ 511 005e 264B     		ldr	r3, .L34+12
+ 512 0060 8C22     		movs	r2, #140
+ 513 0062 1A62     		str	r2, [r3, #32]
+ 281:../src/main.c ****     TIMER1->TOP  = PWM_PER;
+ 514              		.loc 1 281 0
+ 515 0064 244B     		ldr	r3, .L34+12
+ 516 0066 8C22     		movs	r2, #140
+ 517 0068 DA61     		str	r2, [r3, #28]
+ 282:../src/main.c ****     TIMER1->CTRL = 0;           //UP COUNT mode, since we don't have to worry about deadtime
+ 518              		.loc 1 282 0
+ 519 006a 234B     		ldr	r3, .L34+12
+ 520 006c 0022     		movs	r2, #0
+ 521 006e 1A60     		str	r2, [r3]
+ 283:../src/main.c ****     TIMER1->ROUTE = 3<<16       //Using position 3 for TIMER1 CC0 (PB7)
+ 522              		.loc 1 283 0
+ 523 0070 214B     		ldr	r3, .L34+12
+ 524 0072 224A     		ldr	r2, .L34+16
+ 525 0074 9A62     		str	r2, [r3, #40]
+ 284:../src/main.c ****             | 1<<0;             //enables CC0
+ 285:../src/main.c ****     /** Setup Primary VGATE2 (CC0) **/
+ 286:../src/main.c ****     TIMER1->CC[0].CTRL = 3<<0   //Enable PWM mode
+ 526              		.loc 1 286 0
+ 527 0076 204B     		ldr	r3, .L34+12
+ 528 0078 1722     		movs	r2, #23
+ 529 007a 1A63     		str	r2, [r3, #48]
+ 287:../src/main.c ****             | 1<<4              //initial value is 1.
+ 288:../src/main.c ****             | 1<<2;             //inverts output
+ 289:../src/main.c ****     GPIO->P[1].MODEL |= 5<<4*7; //Enable output on PB7
+ 530              		.loc 1 289 0
+ 531 007c 1D4A     		ldr	r2, .L34+8
+ 532 007e 1D4B     		ldr	r3, .L34+8
+ 533 0080 9B6A     		ldr	r3, [r3, #40]
+ 534 0082 43F0A043 		orr	r3, r3, #1342177280
+ 535 0086 9362     		str	r3, [r2, #40]
+ 290:../src/main.c ****     GPIO->P[1].CTRL   = 2;      //Sets drive current to HIGH
+ 536              		.loc 1 290 0
+ 537 0088 1A4B     		ldr	r3, .L34+8
+ 538 008a 0222     		movs	r2, #2
+ 539 008c 5A62     		str	r2, [r3, #36]
+ 291:../src/main.c ****     ChangePWMDC(-1, BUCK);
+ 540              		.loc 1 291 0
+ 541 008e 4FF0FF30 		mov	r0, #-1
+ 542 0092 0021     		movs	r1, #0
+ 543 0094 FFF7FEFF 		bl	ChangePWMDC
+ 292:../src/main.c ****     /** Start the Timer **/
+ 293:../src/main.c ****     TIMER0_START();
+ 544              		.loc 1 293 0
+ 545 0098 144B     		ldr	r3, .L34
+ 546 009a 0122     		movs	r2, #1
+ 547 009c 5A60     		str	r2, [r3, #4]
+ 294:../src/main.c ****     TIMER1_START();
+ 548              		.loc 1 294 0
+ 549 009e 164B     		ldr	r3, .L34+12
+ 550 00a0 0122     		movs	r2, #1
+ 551 00a2 5A60     		str	r2, [r3, #4]
+ 552              	.L33:
+ 295:../src/main.c ****     while(1)
+ 296:../src/main.c ****     {
+ 297:../src/main.c ****         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+ 553              		.loc 1 297 0
+ 554 00a4 0120     		movs	r0, #1
+ 555 00a6 4FF0FF31 		mov	r1, #-1
+ 556 00aa FFF7FEFF 		bl	ulTaskNotifyTake
+ 298:../src/main.c ****         for(dc = 0; dc <= PWM_PER; dc++)
+ 557              		.loc 1 298 0
+ 558 00ae 0023     		movs	r3, #0
+ 559 00b0 FB81     		strh	r3, [r7, #14]	@ movhi
+ 560 00b2 09E0     		b	.L31
+ 561              	.L32:
+ 299:../src/main.c ****         {
+ 300:../src/main.c ****             TIMER1->CC[0].CCVB = dc;
+ 562              		.loc 1 300 0 discriminator 3
+ 563 00b4 104A     		ldr	r2, .L34+12
+ 564 00b6 FB89     		ldrh	r3, [r7, #14]
+ 565 00b8 D363     		str	r3, [r2, #60]
+ 301:../src/main.c ****             vTaskDelay(1000);
+ 566              		.loc 1 301 0 discriminator 3
+ 567 00ba 4FF47A70 		mov	r0, #1000
+ 568 00be FFF7FEFF 		bl	vTaskDelay
+ 298:../src/main.c ****         for(dc = 0; dc <= PWM_PER; dc++)
+ 569              		.loc 1 298 0 discriminator 3
+ 570 00c2 FB89     		ldrh	r3, [r7, #14]
+ 571 00c4 0133     		adds	r3, r3, #1
+ 572 00c6 FB81     		strh	r3, [r7, #14]	@ movhi
+ 573              	.L31:
+ 298:../src/main.c ****         for(dc = 0; dc <= PWM_PER; dc++)
+ 574              		.loc 1 298 0 is_stmt 0 discriminator 1
+ 575 00c8 FB89     		ldrh	r3, [r7, #14]
+ 576 00ca 8C2B     		cmp	r3, #140
+ 577 00cc F2D9     		bls	.L32
+ 302:../src/main.c ****         }
+ 303:../src/main.c ****         PUMP_DIS();
+ 578              		.loc 1 303 0 is_stmt 1
+ 579 00ce 094B     		ldr	r3, .L34+8
+ 580 00d0 4FF40072 		mov	r2, #512
+ 581 00d4 C3F8A420 		str	r2, [r3, #164]
+ 304:../src/main.c ****         PUMP2_DIS();
+ 582              		.loc 1 304 0
+ 583 00d8 064A     		ldr	r2, .L34+8
+ 584 00da 064B     		ldr	r3, .L34+8
+ 585 00dc D3F89830 		ldr	r3, [r3, #152]
+ 586 00e0 23F00F03 		bic	r3, r3, #15
+ 587 00e4 C2F89830 		str	r3, [r2, #152]
+ 305:../src/main.c ****     }
+ 588              		.loc 1 305 0
+ 589 00e8 DCE7     		b	.L33
+ 590              	.L35:
+ 591 00ea 00BF     		.align	2
+ 592              	.L34:
+ 593 00ec 00000140 		.word	1073807360
+ 594 00f0 06000100 		.word	65542
+ 595 00f4 00600040 		.word	1073766400
+ 596 00f8 00040140 		.word	1073808384
+ 597 00fc 01000300 		.word	196609
+ 598              		.cfi_endproc
+ 599              	.LFE65:
+ 601              		.section	.rodata
+ 602              		.align	2
+ 603              	.LC0:
+ 604 0000 42757474 		.ascii	"Buttn\000"
+ 604      6E00
+ 605 0006 0000     		.align	2
+ 606              	.LC1:
+ 607 0008 4C454400 		.ascii	"LED\000"
+ 608              		.align	2
+ 609              	.LC2:
+ 610 000c 50574D00 		.ascii	"PWM\000"
+ 611              		.align	2
+ 612              	.LC3:
+ 613 0010 41444300 		.ascii	"ADC\000"
+ 614              		.section	.text.main,"ax",%progbits
+ 615              		.align	2
+ 616              		.global	main
+ 617              		.thumb
+ 618              		.thumb_func
+ 620              	main:
+ 621              	.LFB66:
+ 306:../src/main.c **** }
+ 307:../src/main.c **** 
+ 308:../src/main.c **** /****************** main()
+ 309:../src/main.c ****  * Description:     Creates all tasks, semaphores, mutexes, and queues then
+ 310:../src/main.c ****  *                  begins the FreeRTOS scheduler.
+ 311:../src/main.c ****  * Params           None
+ 312:../src/main.c ****  * Return           None
+ 313:../src/main.c ****  * Last Edited:     11/17/14 RTC
+ 314:../src/main.c ****  */
+ 315:../src/main.c **** int main(void)
+ 316:../src/main.c **** {
+ 622              		.loc 1 316 0
+ 623              		.cfi_startproc
+ 624              		@ args = 0, pretend = 0, frame = 8
+ 625              		@ frame_needed = 1, uses_anonymous_args = 0
+ 626 0000 80B5     		push	{r7, lr}
+ 627              		.cfi_def_cfa_offset 8
+ 628              		.cfi_offset 7, -8
+ 629              		.cfi_offset 14, -4
+ 630 0002 84B0     		sub	sp, sp, #16
+ 631              		.cfi_def_cfa_offset 24
+ 632 0004 02AF     		add	r7, sp, #8
+ 633              		.cfi_def_cfa 7, 16
+ 317:../src/main.c ****     int dummy = CMU->HFRCOCTRL;
+ 634              		.loc 1 317 0
+ 635 0006 2C4B     		ldr	r3, .L39
+ 636 0008 DB68     		ldr	r3, [r3, #12]
+ 637 000a 7B60     		str	r3, [r7, #4]
+ 318:../src/main.c ****     CMU->HFRCOCTRL = (CMU->HFRCOCTRL & ~(0x7ff)) | 5<<8
+ 638              		.loc 1 318 0
+ 639 000c 2A49     		ldr	r1, .L39
+ 640 000e 2A4B     		ldr	r3, .L39
+ 641 0010 DB68     		ldr	r3, [r3, #12]
+ 642 0012 23F4FF63 		bic	r3, r3, #2040
+ 643 0016 23F00703 		bic	r3, r3, #7
+ 319:../src/main.c ****             | ((DEVINFO->HFRCOCAL1 & _DEVINFO_HFRCOCAL1_BAND28_MASK) >> _DEVINFO_HFRCOCAL1_BAND28_S
+ 644              		.loc 1 319 0
+ 645 001a 284A     		ldr	r2, .L39+4
+ 646 001c 126B     		ldr	r2, [r2, #48]
+ 647 001e 02F47F42 		and	r2, r2, #65280
+ 648 0022 120A     		lsrs	r2, r2, #8
+ 649 0024 1343     		orrs	r3, r3, r2
+ 650 0026 43F4A063 		orr	r3, r3, #1280
+ 318:../src/main.c ****     CMU->HFRCOCTRL = (CMU->HFRCOCTRL & ~(0x7ff)) | 5<<8
+ 651              		.loc 1 318 0
+ 652 002a CB60     		str	r3, [r1, #12]
+ 320:../src/main.c ****     dummy = CMU->HFRCOCTRL;
+ 653              		.loc 1 320 0
+ 654 002c 224B     		ldr	r3, .L39
+ 655 002e DB68     		ldr	r3, [r3, #12]
+ 656 0030 7B60     		str	r3, [r7, #4]
+ 321:../src/main.c ****     CMU->HFPERCLKEN0 |= (1 << 13)   //Enable GPIO clock
+ 657              		.loc 1 321 0
+ 658 0032 214A     		ldr	r2, .L39
+ 659 0034 204B     		ldr	r3, .L39
+ 660 0036 5B6C     		ldr	r3, [r3, #68]
+ 661 0038 43F44833 		orr	r3, r3, #204800
+ 662 003c 43F06003 		orr	r3, r3, #96
+ 663 0040 5364     		str	r3, [r2, #68]
+ 322:../src/main.c ****              | (1<<16)              //Enable ADC clock
+ 323:../src/main.c ****              | (1<<17)              //Enable DAC clock
+ 324:../src/main.c ****              | (1<<5 )              //Enable Timer0 (Timer1 is <<6)
+ 325:../src/main.c ****              | (1<<6 );             //Enable Timer1
+ 326:../src/main.c ****     xTaskCreate(ButtonTask, "Buttn", 175, NULL, 4, NULL);
+ 664              		.loc 1 326 0
+ 665 0042 0423     		movs	r3, #4
+ 666 0044 0093     		str	r3, [sp]
+ 667 0046 0023     		movs	r3, #0
+ 668 0048 0193     		str	r3, [sp, #4]
+ 669 004a 1D48     		ldr	r0, .L39+8
+ 670 004c 1D49     		ldr	r1, .L39+12
+ 671 004e AF22     		movs	r2, #175
+ 672 0050 0023     		movs	r3, #0
+ 673 0052 FFF7FEFF 		bl	xTaskCreate
+ 327:../src/main.c ****     xTaskCreate(LEDTask, "LED", 128, NULL, 1, &xLEDTask);
+ 674              		.loc 1 327 0
+ 675 0056 0123     		movs	r3, #1
+ 676 0058 0093     		str	r3, [sp]
+ 677 005a 1B4B     		ldr	r3, .L39+16
+ 678 005c 0193     		str	r3, [sp, #4]
+ 679 005e 1B48     		ldr	r0, .L39+20
+ 680 0060 1B49     		ldr	r1, .L39+24
+ 681 0062 8022     		movs	r2, #128
+ 682 0064 0023     		movs	r3, #0
+ 683 0066 FFF7FEFF 		bl	xTaskCreate
+ 328:../src/main.c ****     xTaskCreate(PWMTask, "PWM", 128, NULL, 5, &xPWMTask);
+ 684              		.loc 1 328 0
+ 685 006a 0523     		movs	r3, #5
+ 686 006c 0093     		str	r3, [sp]
+ 687 006e 194B     		ldr	r3, .L39+28
+ 688 0070 0193     		str	r3, [sp, #4]
+ 689 0072 1948     		ldr	r0, .L39+32
+ 690 0074 1949     		ldr	r1, .L39+36
+ 691 0076 8022     		movs	r2, #128
+ 692 0078 0023     		movs	r3, #0
+ 693 007a FFF7FEFF 		bl	xTaskCreate
+ 329:../src/main.c ****     xTaskCreate(ADTask, "ADC", 128, NULL, 2, NULL);
+ 694              		.loc 1 329 0
+ 695 007e 0223     		movs	r3, #2
+ 696 0080 0093     		str	r3, [sp]
+ 697 0082 0023     		movs	r3, #0
+ 698 0084 0193     		str	r3, [sp, #4]
+ 699 0086 1648     		ldr	r0, .L39+40
+ 700 0088 1649     		ldr	r1, .L39+44
+ 701 008a 8022     		movs	r2, #128
+ 702 008c 0023     		movs	r3, #0
+ 703 008e FFF7FEFF 		bl	xTaskCreate
+ 330:../src/main.c **** //    xTaskCreate(DACTask, "DAC", 128, NULL, 3, &xDACTask);
+ 331:../src/main.c ****     PuffSem = xSemaphoreCreateBinary();
+ 704              		.loc 1 331 0
+ 705 0092 0120     		movs	r0, #1
+ 706 0094 0021     		movs	r1, #0
+ 707 0096 0322     		movs	r2, #3
+ 708 0098 FFF7FEFF 		bl	xQueueGenericCreate
+ 709 009c 0246     		mov	r2, r0
+ 710 009e 124B     		ldr	r3, .L39+48
+ 711 00a0 1A60     		str	r2, [r3]
+ 332:../src/main.c ****     vTaskStartScheduler();  //Begin kernel
+ 712              		.loc 1 332 0
+ 713 00a2 FFF7FEFF 		bl	vTaskStartScheduler
+ 714              	.L37:
+ 333:../src/main.c ****     while (dummy)
+ 715              		.loc 1 333 0 discriminator 1
+ 716 00a6 7B68     		ldr	r3, [r7, #4]
+ 717 00a8 002B     		cmp	r3, #0
+ 718 00aa FCD1     		bne	.L37
+ 334:../src/main.c ****     {}
+ 335:../src/main.c **** 
+ 336:../src/main.c ****   /* Never reach this statement. */
+ 337:../src/main.c ****   return (0);
+ 719              		.loc 1 337 0
+ 720 00ac 0023     		movs	r3, #0
+ 338:../src/main.c **** }
+ 721              		.loc 1 338 0
+ 722 00ae 1846     		mov	r0, r3
+ 723 00b0 0837     		adds	r7, r7, #8
+ 724              		.cfi_def_cfa_offset 8
+ 725 00b2 BD46     		mov	sp, r7
+ 726              		.cfi_def_cfa_register 13
+ 727              		@ sp needed
+ 728 00b4 80BD     		pop	{r7, pc}
+ 729              	.L40:
+ 730 00b6 00BF     		.align	2
+ 731              	.L39:
+ 732 00b8 00800C40 		.word	1074561024
+ 733 00bc B081E00F 		.word	266371504
+ 734 00c0 00000000 		.word	ButtonTask
+ 735 00c4 00000000 		.word	.LC0
+ 736 00c8 00000000 		.word	xLEDTask
+ 737 00cc 00000000 		.word	LEDTask
+ 738 00d0 08000000 		.word	.LC1
+ 739 00d4 00000000 		.word	xPWMTask
+ 740 00d8 00000000 		.word	PWMTask
+ 741 00dc 0C000000 		.word	.LC2
+ 742 00e0 00000000 		.word	ADTask
+ 743 00e4 10000000 		.word	.LC3
+ 744 00e8 00000000 		.word	PuffSem
+ 745              		.cfi_endproc
+ 746              	.LFE66:
+ 748              		.section	.bss.i.5887,"aw",%nobits
+ 749              		.align	2
+ 752              	i.5887:
+ 753 0000 00000000 		.space	4
+ 754              		.text
+ 755              	.Letext0:
+ 756              		.file 2 "c:\\program files (x86)\\emprog\\thunderbench-arm-v3.85\\arm\\arm-none-eabi\\include\\mac
+ 757              		.file 3 "c:\\program files (x86)\\emprog\\thunderbench-arm-v3.85\\arm\\arm-none-eabi\\include\\std
+ 758              		.file 4 "U:/Thunderspace/EFM32LG330F128/RTOSincludes/portmacro.h"
+ 759              		.file 5 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\Device\\EnergyMicro\\EFM32\\Include/EFM32LG3
+ 760              		.file 6 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\Device\\EnergyMicro\\EFM32\\Include/efm32lg_
+ 761              		.file 7 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\Device\\EnergyMicro\\EFM32\\Include/efm32lg_
+ 762              		.file 8 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\Device\\EnergyMicro\\EFM32\\Include/efm32lg_
+ 763              		.file 9 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\Device\\EnergyMicro\\EFM32\\Include/efm32lg_
+ 764              		.file 10 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\Device\\EnergyMicro\\EFM32\\Include/efm32lg
+ 765              		.file 11 "U:/Thunderspace/EFM32LG330F128/RTOSincludes/queue.h"
+ 766              		.file 12 "U:/Thunderspace/EFM32LG330F128/RTOSincludes/semphr.h"
+ 767              		.file 13 "U:/Thunderspace/EFM32LG330F128/RTOSincludes/task.h"
+ 768              		.file 14 "../src/../Libraries/../Libraries/datatypes.h"
+ 769              		.file 15 "U:\\Thunderspace\\EFM32LG330F128\\Libraries\\CMSIS\\Include/core_cm3.h"
+ 770              		.file 16 "../src/../Libraries/includes.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+                            *COM*:00000004 PuffSem
+                            *COM*:00000004 LEDSem
+                            *COM*:00000004 LEDRedMut
+                            *COM*:00000004 LEDGreenMut
+                            *COM*:00000004 LEDBlueMut
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:28     .bss.xLEDTask:00000000 xLEDTask
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:25     .bss.xLEDTask:00000000 $d
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:35     .bss.xPWMTask:00000000 xPWMTask
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:32     .bss.xPWMTask:00000000 $d
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:42     .bss.xDACTask:00000000 xDACTask
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:39     .bss.xDACTask:00000000 $d
+                            *COM*:00000004 HighWaterMark
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:46     .text.ButtonPress:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:51     .text.ButtonPress:00000000 ButtonPress
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:85     .text.ButtonPress:00000028 $d
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:90     .text.ButtonRelease:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:95     .text.ButtonRelease:00000000 ButtonRelease
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:271    .text.ChangePWMDC:00000000 ChangePWMDC
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:126    .text.ButtonRelease:0000002c $d
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:131    .text.ButtonTask:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:136    .text.ButtonTask:00000000 ButtonTask
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:261    .text.ButtonTask:000000d0 $d
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:266    .text.ChangePWMDC:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:433    .text.ChangePWMDC:000000e4 $d
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:441    .text.PWMTask:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:446    .text.PWMTask:00000000 PWMTask
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:593    .text.PWMTask:000000ec $d
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:602    .rodata:00000000 $d
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:615    .text.main:00000000 $t
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:620    .text.main:00000000 main
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:732    .text.main:000000b8 $d
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:749    .bss.i.5887:00000000 $d
+C:\Users\Riley\AppData\Local\Temp\ccGLijko.s:752    .bss.i.5887:00000000 i.5887
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+vTaskDelay
+ulTaskNotifyTake
+xTaskCreate
+xQueueGenericCreate
+vTaskStartScheduler
+LEDTask
+ADTask
